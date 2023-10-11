@@ -5,14 +5,22 @@
 
 # A játék
 A játék szintekből áll, mindegyik egy különböző síkon zajlik. Egy adott síkról halványan láthatók az alatta lévő szint elemei.
-A szintek között szabadon járhat át a játékos, mélyebbre mehet a piros sejt megevése által és magasabb szintre térhet vissza a kék sejt megevésével. Minden szinten megtalálható ez a 2 sejt, időnként jelzik a játékosnak hollétüket, a képernyőn az irányukba megjelenő kék és piros buborékok által.
+A szintek között szabadon járhat át a játékos, mélyebbre mehet a piros sejt megevése által és magasabb szintre térhet vissza a kék sejt megevésével. Minden szinten megtalálható a kék és piros sejt, kivéve az első és utolsó szinten. Időnként a képernyőn megjelnik az irányukban egy kék és egy piros buborék, hogy könnyebben megtalálhatóak legyenek.
 
 ## A táplálkozás
-A játékos több részből áll. Van egy szája és ehhez kapcsolódnak a tov
-ábbi részei. A játékos megeheti a békésen lebegő sejteket, valamint más lények *szerves részeit*.
+A játékos több részből áll. Van egy szája és ehhez kapcsolódnak a további részei. A játékos megeheti a békésen lebegő sejteket, valamint más lények *szerves részeit*. 
 
-### Az emésztés folyamata
-Amikor egy játékos megeszik egy sejtet, az végig kell, hogy utazzon a telítetlen részeinek láncolatán. 
+## Az emésztés folyamata
+A játékos részei lehetnek üresek, telítettek, vagy *szerves résszé* válhatnak.
+Amikor egy játékos elfogyaszt egy egységnyi táplálékot, az végig kell, hogy haladjon a részeinek láncolatán. A táplálék feltölti a szájhoz legközelebb eső első üres helyet az organizmusban. Ha a teljes lény telítetté válik, a végére növeszt egy új üres sejtet, az egyszerű sejtjeinek telítettségét felhasználva. Ha többet eszik, mint amit be tud építeni, a táplálékot kiüríti egy sejt formájában.  
+
+
+## A játékos felépítése
+Egy lény a következő részekből épülhet fel:
+- **Száj**:
+- **Szerves részek**: 2 egységnyi táplálékra van szükség a telítéshez, amikor telítve van életerőként szolgál.
+- **Egyszerű sejtek**:
+
 
 ### A játék elemei
 1. 
