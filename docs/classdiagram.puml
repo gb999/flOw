@@ -1,0 +1,11 @@
+class Entity {
+
+}
+
+class SimpleCell 
+class NextLevel 
+
+BlueCell -|> SimpleCell
+RedCell  -|> SimpleCell
+SimpleCell --|> Entity
+SnakeFish --|> Entity

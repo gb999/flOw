@@ -55,7 +55,7 @@ public class GameCanvas extends Canvas implements Runnable {
         Graphics2D g2 = (Graphics2D)g;
 
         g2.setColor(Color.blue);
-        g2.fillRect(0, 0, 100, 100);
+        g2.fillRect(0, 0,  getWidth(), getHeight());
         g2.dispose();
     }
 
