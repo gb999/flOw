@@ -1,5 +1,5 @@
 package parts.edible;
 
-public class Edible {
+public interface Edible {
     
 }

@@ -43,22 +43,25 @@ Egy lény a következő részekből épülhet fel:
 ## A játékos pusztulása
 Ha a játékos minden szerves részét megeszik, egy síkkal magasabbra kerül, ott folytathatja a játékot. Egy szerves részt visszakap.
 
+
+# Megvalósítás terve
 ## A szintek 
 Minden szinten egy XML fájl szerint jönnek létre az ott található lények és békés sejtek. A formátum:
 ```
 <Game>
     <Level> 
-        <Food count = "" type = ""/> 
-        <Enemy type = "" segments = "" speed = "">
+        <SpawnSimpleCells count = ""/> 
+        <SpawnEntity type = "" segments = "" speed = "">
     </Level>
     <Level> 
-        <Food count = "" type = ""/> 
-        <Enemy type = "" segments = "" speed = "">
+        <SpawnCells count = "" type = ""/> 
+        <SpawnEntity type = "" segments = "" speed = "">
     </Level>
     ...
 </Game>
 ```
-
+A SpawnCells-el lehet count számú egyszerű sejtet létrehozni.
+A SpawnEntity segítségével pedig bármilyen, azaz ellenséges lényeket is lehet létrehozni. 
 
 
 
