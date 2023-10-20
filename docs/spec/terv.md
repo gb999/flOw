@@ -10,12 +10,13 @@ static class Game {
     - Canvas 
     - Level currentLevel   
     - Level nextLevel
+    - Level loadLevel()
 
-    + loadLevel()
     + void update()
     + void repaint()
 }
-
+Level -- Game::currentLevel
+Level -- Game::nextLevel
 
 abstract class Entity {
     Point position

@@ -49,11 +49,11 @@ Ha a játékos minden szerves részét megeszik, egy síkkal magasabbra kerül, 
 Minden szinten egy XML fájl szerint jönnek létre az ott található lények és békés sejtek. A formátum:
 ```
 <Game>
-    <Level> 
+    <Level color = ""> 
         <SpawnSimpleCells count = ""/> 
         <SpawnEntity type = "" segments = "" speed = "">
     </Level>
-    <Level> 
+    <Level color = "">  
         <SpawnCells count = "" type = ""/> 
         <SpawnEntity type = "" segments = "" speed = "">
     </Level>
