@@ -15,22 +15,22 @@ static class Game {
     + void update()
     + void repaint()
 }
-interface Drawable {
-    + void draw()
-}
 
-abstract class Entity implements Drawable{
+
+abstract class Entity {
     Point position
 
     + void update()
+    + void draw()
+
 }
 class HostileEntity extends Entity {
     eat(int foodValue)
 }
-class CellChain extends HostileEntity {
+class ChainCreature extends HostileEntity {
     LinkedList<BodySegment> body
 }
-class Player extends CellChain {
+class Player extends ChainCreature {
 
 }
 
@@ -48,13 +48,13 @@ interface Edible {
     void isEatenBy(HostileEntity, foodValue)
 }
 
-abstract BodySegment implements Drawable {
+abstract BodySegment extends Entity {
 
 }
 
 class Mouth extends BodySegment
-class VitalPart extends BodySegment
-class SimpleCell extends BodySegment
+class VitalSegment extends BodySegment implements Edible
+class SimpleSegment extends BodySegment
 
 
 @enduml

@@ -1,5 +1,5 @@
 package entities;
 
-interface Edible {
-
+public interface Edible {
+    
 }
