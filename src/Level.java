@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import entities.Entity;
 
 class Level {
-    private Color color;    
+    protected Color color;    
     public ArrayList<Entity> entities;
+    public Level() {
+        this.color = new Color(0, 255, 0, 255);
+    }
 
 }
