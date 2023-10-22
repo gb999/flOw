@@ -35,6 +35,7 @@ public class Game implements Runnable {
 
     public void update() {
         canvas.update();
+        currentLevel.update();
     }
 
     public void repaint() {

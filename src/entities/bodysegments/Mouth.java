@@ -4,22 +4,18 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import entities.Entity;
+import physics.Vec2;
 
 public class Mouth extends BodySegment {
-    public Mouth(Entity owner) {
-        super(owner);
-
-        x = y = 100;
+    public Mouth(Entity owner, Vec2 pos) {
+        super(owner, pos);
     }
-    
 
-    public void update() {
-
-    }
     public void draw(Graphics2D g2) {
 
         g2.setColor(Color.WHITE);
-        g2.drawArc(x, y, 32, 32, 0, 180);   // Face in owner's direction
+        int dir = vel.getAngleDegrees();
+        g2.drawArc((int)pos.x, (int)pos.y, 32, 32, -dir+90, 180);   // Face in velocity's direction
     }
 
 }

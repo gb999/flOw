@@ -1,5 +1,7 @@
 package entities.hostile;
 
-abstract class HostileEntity {
+import entities.Entity;
+
+abstract class HostileEntity extends Entity {
     abstract void eat(int foodValue);
 }
