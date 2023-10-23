@@ -1,8 +1,5 @@
-import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.MouseInfo;
-import java.awt.Point;
 
 import javax.swing.JPanel;
 
@@ -11,7 +8,6 @@ import entities.Entity;
 public class GameCanvas extends JPanel {
     Game game;
     static GameCanvas canvas;
-
     GameCanvas(Game game) {
         this.game = game;
         canvas = this;
@@ -19,11 +15,6 @@ public class GameCanvas extends JPanel {
 
 
     public void update() {
-        Point mouse =  MouseInfo.getPointerInfo().getLocation();
-        // Point canvasCoords = this.getLocationOnScreen();
-        // System.out.println(mouse.getX()-canvasCoords.getX());
-        // System.out.println(mouse.getY()-canvasCoords.getY());
-
 
     }
     public void paint(Graphics g) {

@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 
 import entities.hostile.ChainCreature;
 
-public class Player extends ChainCreature  implements MouseListener{
+public class Player extends ChainCreature  implements MouseListener {
     boolean mouseDown = false;
     Player() {
         super();
