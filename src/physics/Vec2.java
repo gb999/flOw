@@ -21,6 +21,10 @@ public class Vec2 {
         this.y = end.y - start.y;
     }
 
+    public void set(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
 
 
     public void add(Vec2 v) {

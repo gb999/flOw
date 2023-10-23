@@ -6,8 +6,9 @@ import physics.Vec2;
 
 public abstract class Entity {
     public Vec2 pos;
-    protected Vec2 vel;
+    public Vec2 vel;
     protected Vec2 acc;
+    
     public Entity() {
         pos = new Vec2();
         vel = new Vec2();
@@ -33,4 +34,5 @@ public abstract class Entity {
         acc.add(force);
     }
     public abstract void draw(Graphics2D g2);
+    
 }

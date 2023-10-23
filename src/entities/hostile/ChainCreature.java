@@ -18,9 +18,9 @@ public class ChainCreature extends HostileEntity {
         body = new LinkedList<BodySegment>();
         pos = new Vec2(200,100);
         body.add(new Mouth(this, pos));
-        body.getFirst().applyForce(new Vec2(1,1)); // Move Mouth
+        // body.getFirst().applyForce(new Vec2(1,1)); // Move Mouth
 
-        body.add(new VitalSegment(this, new Vec2(pos.x, pos.y - 20)));
+        body.add(new VitalSegment(this, new Vec2(pos.x, pos.y )));
         for(int i = 0; i < 8; i++) {
             BodySegment s = new SimpleSegment(this, new Vec2(pos.x, pos.y + i * 20));
             body.add(s);
@@ -36,8 +36,11 @@ public class ChainCreature extends HostileEntity {
     @Override
     public void update() {
         super.update();
-        body.getFirst().update();
 
+        BodySegment first = body.getFirst();
+        first.vel = this.vel;   
+        first.update();
+        this.pos = first.pos;
         // Add springs between body segments
         ListIterator<BodySegment> it = body.listIterator(0);
         BodySegment bcurrent = it.next();

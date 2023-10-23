@@ -14,6 +14,7 @@ public class GameCanvas extends JPanel {
     GameCanvas(Game game) {
         this.game = game;
     }
+        
 
     public void update() {
         Point mouse =  MouseInfo.getPointerInfo().getLocation();
