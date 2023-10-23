@@ -1,4 +1,4 @@
-package physics;
+package util;
 
 public class Vec2 {
     public double x, y;

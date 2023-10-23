@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 import entities.Edible;
 import entities.Entity;
-import physics.Vec2;
+import util.Vec2;
 
 
 public class VitalSegment extends BodySegment implements Edible {

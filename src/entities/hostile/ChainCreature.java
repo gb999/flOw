@@ -9,7 +9,7 @@ import entities.bodysegments.BodySegment;
 import entities.bodysegments.Mouth;
 import entities.bodysegments.SimpleSegment;
 import entities.bodysegments.VitalSegment;
-import physics.Vec2;
+import util.Vec2;
 
 public class ChainCreature extends HostileEntity {
     LinkedList<BodySegment> body;

@@ -1,7 +1,7 @@
 package entities.bodysegments;
 
 import entities.Entity;
-import physics.Vec2;
+import util.Vec2;
 
 public abstract class BodySegment extends Entity {
     protected Entity owner;

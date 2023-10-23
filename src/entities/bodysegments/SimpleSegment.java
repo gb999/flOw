@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import entities.Entity;
-import physics.Vec2;
+import util.Vec2;
 
 public class SimpleSegment extends BodySegment {
     static final int radius = 12;

@@ -2,7 +2,7 @@ package entities;
 
 import java.awt.Graphics2D;
 
-import physics.Vec2;
+import util.Vec2;
 
 public abstract class Entity {
     public Vec2 pos;

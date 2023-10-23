@@ -10,15 +10,17 @@ import entities.Entity;
 
 public class GameCanvas extends JPanel {
     Game game;
+    static GameCanvas canvas;
 
     GameCanvas(Game game) {
         this.game = game;
+        canvas = this;
     }
-        
+
 
     public void update() {
         Point mouse =  MouseInfo.getPointerInfo().getLocation();
-        Point canvasCoords = this.getLocationOnScreen();
+        // Point canvasCoords = this.getLocationOnScreen();
         // System.out.println(mouse.getX()-canvasCoords.getX());
         // System.out.println(mouse.getY()-canvasCoords.getY());
 
