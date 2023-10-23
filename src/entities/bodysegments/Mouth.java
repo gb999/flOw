@@ -15,7 +15,7 @@ public class Mouth extends BodySegment {
 
         g2.setColor(Color.WHITE);
         int dir = vel.getAngleDegrees();
-        g2.drawArc((int)pos.x, (int)pos.y, 32, 32, -dir+90, 180);   // Face in velocity's direction
+        g2.drawArc((int)pos.x-16, (int)pos.y-16, 32, 32, -dir+90, 180);   // Face in velocity's direction
     }
 
 }
