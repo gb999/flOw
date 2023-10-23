@@ -37,27 +37,30 @@ public class ChainCreature extends HostileEntity {
     public void update() {
         super.update();
 
+        // the Mouth pulls the whole body
         BodySegment first = body.getFirst();
         first.vel = this.vel;   
         first.update();
         this.pos = first.pos;
-        // Add springs between body segments
+
+        // Iterate through segments
         ListIterator<BodySegment> it = body.listIterator(0);
         BodySegment bcurrent = it.next();
         while(it.hasNext()) {
             bcurrent.update();
             BodySegment bnext = it.next();
 
-            
+            // Keep distance fixed between segments 
             double distance = bcurrent.pos.distanceFrom(bnext.pos); 
             double desiredDistance = 30;
-            if(distance > desiredDistance) { // fixed joint
+            if(distance > desiredDistance) { 
                 Vec2 displacement = (new Vec2(bcurrent.pos, bnext.pos)); 
                 displacement.normalize();
                 displacement.mult(desiredDistance - distance);
                 bnext.pos.add(displacement);
             }
             bcurrent = bnext;
+
         }
 
     }
