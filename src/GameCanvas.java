@@ -4,9 +4,11 @@ import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
+import javax.swing.JPanel;
+
 import entities.Entity;
 
-public class GameCanvas extends Canvas {
+public class GameCanvas extends JPanel {
     Game game;
 
     GameCanvas(Game game) {

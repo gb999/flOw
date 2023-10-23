@@ -8,7 +8,7 @@ class Level {
     protected Color color;    
     public ArrayList<Entity> entities;
     public Level() {
-        this.color = new Color(0, 255, 0, 255);
+        this.color = new Color(0, 255, 0, 150);
         entities = new ArrayList<Entity>();
         entities.add(new ChainCreature());
     }
