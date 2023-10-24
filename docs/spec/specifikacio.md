@@ -41,7 +41,7 @@ Egy lény a következő részekből épülhet fel:
 - Ellenségek: Ugyanúgy épülnek fel, mint a játékos, a békés sejteket meg tudják enni, de a piros/kék sejteket nem. Ha elpusztulnak (Összes szerves részüket megette a játékos) békés sejteket hagyhatnak maguk után.
 
 ## A játékos pusztulása
-Ha a játékos minden szerves részét megeszik, egy síkkal magasabbra kerül, ott folytathatja a játékot. Egy szerves részt visszakap.
+Ha a játékos minden szerves részét megeszik, egy síkkal magasabbra kerül, ott folytathatja a játékot. Egy szerves részt visszakap. Minden sejtje telítetlenné válik, a hosszát megtartja.
 
 
 # Megvalósítás terve
