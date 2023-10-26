@@ -1,25 +1,26 @@
 package entities.hostile;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-
+import entities.Edible;
+import entities.Entity;
 import entities.bodysegments.BodySegment;
 import entities.bodysegments.Mouth;
 import entities.bodysegments.SimpleSegment;
 import entities.bodysegments.VitalSegment;
 import util.Vec2;
 
-public class ChainCreature extends HostileEntity {
+public class ChainCreature extends HostileCreature {
     LinkedList<BodySegment> body;
-
-    public ChainCreature() {
+    Mouth mouth;
+    public ChainCreature(Vec2 pos) {
+        super(pos);
         body = new LinkedList<BodySegment>();
-        pos = new Vec2(200,100);
-        body.add(new Mouth(this, pos));
-        // body.getFirst().applyForce(new Vec2(1,1)); // Move Mouth
-
+        mouth = new Mouth(this, pos);
+        body.add(mouth);
         body.add(new VitalSegment(this, new Vec2(pos.x, pos.y )));
         for(int i = 0; i < 8; i++) {
             BodySegment s = new SimpleSegment(this, new Vec2(pos.x, pos.y + i * 20));
@@ -29,8 +30,8 @@ public class ChainCreature extends HostileEntity {
     } 
 
     @Override
-    void eat(int foodValue) {
-        throw new UnsupportedOperationException("Unimplemented method 'eat'");
+    public void eat(int foodValue) {
+        System.out.println("eaten " + foodValue);
     }
 
     @Override
@@ -70,5 +71,36 @@ public class ChainCreature extends HostileEntity {
             b.draw(g2);
         } 
     }
+
+    private Edible[] getEdibleSegments() {
+        ArrayList<Edible> edibleSegments = new ArrayList<>();
+        for(BodySegment b : body) {
+            if(b instanceof Edible)
+                edibleSegments.add((Edible)b);
+        }
+        return (Edible[])edibleSegments.toArray();
+    }
+
+    
+    /**
+     * Checks if any edible piece is colliding with mouth.
+     * Returns it. or null;
+     * 
+     * @param 
+     */
+    @Override
+    public Edible checkCollisionsWithMouth(Mouth m) {
+        Edible[] edibleSegments = getEdibleSegments();
+        for(Edible b: edibleSegments) {
+            if(Entity.intersects(m, (Entity) b));
+            return b;
+        }
+        return null;
+    } 
+
+    public Mouth getMouth() {
+        return mouth;
+    }
+
     
 }

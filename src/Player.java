@@ -4,11 +4,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import entities.hostile.ChainCreature;
+import util.Vec2;
 
 public class Player extends ChainCreature  implements MouseListener {
     boolean mouseDown = false;
-    Player() {
-        super();
+    Player(Vec2 pos) {
+        super(pos);
         GameCanvas.canvas.addMouseListener(this);
     }
     public void update() {

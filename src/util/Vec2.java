@@ -6,6 +6,7 @@ public class Vec2 {
         this.x = x;
         this.y = y;
     }   
+    
     public Vec2() {
         this.x = 0;
         this.y = 0;
@@ -61,7 +62,5 @@ public class Vec2 {
     public int getAngleDegrees() {
         return (int) (getAngle() * 180 / Math.PI);
     }
-    
-
     
 }

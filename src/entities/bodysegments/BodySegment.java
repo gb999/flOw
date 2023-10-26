@@ -3,9 +3,11 @@ package entities.bodysegments;
 import entities.Entity;
 import util.Vec2;
 
-public abstract class BodySegment extends Entity {
+public abstract class BodySegment extends Entity  {
     protected Entity owner;
+    
     public BodySegment(Entity owner, Vec2 pos) {
+        super(pos);
         this.owner = owner;
         this.pos = new Vec2(pos);
     }

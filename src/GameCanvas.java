@@ -25,9 +25,8 @@ public class GameCanvas extends JPanel {
         g2.setColor(game.currentLevel.color);
         g2.fillRect(0, 0,  getWidth(), getHeight());
 
-        for(Entity e : game.currentLevel.entities) {
-            e.draw(g2);
-        }
+
+        game.currentLevel.drawEntities(g2);
 
 
         g2.dispose();
