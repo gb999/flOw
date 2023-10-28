@@ -3,7 +3,6 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import entities.Entity;
 
 public class GameCanvas extends JPanel {
     Game game;

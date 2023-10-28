@@ -72,28 +72,27 @@ public class ChainCreature extends HostileCreature {
         } 
     }
 
-    private Edible[] getEdibleSegments() {
+    private ArrayList<Edible> getEdibleSegments() {
         ArrayList<Edible> edibleSegments = new ArrayList<>();
         for(BodySegment b : body) {
             if(b instanceof Edible)
                 edibleSegments.add((Edible)b);
         }
-        return (Edible[])edibleSegments.toArray();
+        return edibleSegments;
     }
 
     
     /**
-     * Checks if any edible piece is colliding with mouth.
+     * Checks if any edible body segment is colliding with the given mouth.
      * Returns it. or null;
-     * 
-     * @param 
      */
     @Override
-    public Edible checkCollisionsWithMouth(Mouth m) {
-        Edible[] edibleSegments = getEdibleSegments();
+    public Edible checkCollisionsWithMouth(Mouth mouth) {
+        ArrayList<Edible> edibleSegments = getEdibleSegments();
         for(Edible b: edibleSegments) {
-            if(Entity.intersects(m, (Entity) b));
-            return b;
+            if(Entity.intersects(mouth, (Entity) b)) {
+                return b;
+            }
         }
         return null;
     } 
@@ -101,6 +100,4 @@ public class ChainCreature extends HostileCreature {
     public Mouth getMouth() {
         return mouth;
     }
-
-    
 }

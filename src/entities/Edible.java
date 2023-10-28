@@ -1,5 +1,6 @@
 package entities;
 
+
 import entities.hostile.HostileCreature;
 
 public interface Edible {

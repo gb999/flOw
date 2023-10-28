@@ -22,6 +22,7 @@ public class SimpleSegment extends BodySegment {
             g2.fillOval((int)pos.x-9, (int)pos.y-9, 19, 19);
             
         }
+
     }
     
 }

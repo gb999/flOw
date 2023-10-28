@@ -1,4 +1,7 @@
+
 import javax.swing.JFrame;
+
+import util.Vec2;
 
 public class Game implements Runnable {
     private GameCanvas canvas;
@@ -6,6 +9,7 @@ public class Game implements Runnable {
     protected Level currentLevel;
     private Level nextLevel;
     private Level levels[];
+    private Player player;
 
     private double FPS = 30;
     private Thread gameThread;
@@ -26,6 +30,8 @@ public class Game implements Runnable {
         initUI();
         gameThread = new Thread(this);
         currentLevel = new Level();
+        player = new Player(new Vec2(this.window.getWidth()/2, this.window.getHeight()/2));
+        currentLevel.player = player;
     }
 
     public void start() {

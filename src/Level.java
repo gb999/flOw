@@ -14,50 +14,46 @@ class Level {
     protected Color color;    
     public ArrayList<PeacefulCell> edibleCells;
     public ArrayList<HostileCreature> hostileCreatures;
+    public Player player;
 
     public Level() {
         this.color = new Color(0, 255, 0, 150);
         edibleCells = new ArrayList<>();
         hostileCreatures = new ArrayList<>();
-
-        hostileCreatures.add(new ChainCreature(new Vec2(170, 100)));
-        hostileCreatures.add(new Player(new Vec2(100, 100)));
+        
+        hostileCreatures.add(new ChainCreature(new Vec2(270, 500)));
         edibleCells.add(new PeacefulCell(new Vec2(500, 500), 0));
     }
     public void update() {
-        
-        // Check collisions between hostile creatures
-        
-
-        // Check collisions between hostile and peaceful cells
-
+        // Check collisions between player and hostile creatures
+        Mouth playerMouth = player.getMouth();  
         for(HostileCreature creature: hostileCreatures) {
-            Mouth mouth = creature.getMouth();
-            for(HostileCreature h : hostileCreatures) {
-                if(h == creature) continue;
-                Edible edibleSegment = h.checkCollisionsWithMouth(mouth);
-                if(edibleSegment != null) {
-                    edibleSegment.isEatenBy(creature);
-                    break; // No need to check more collisions if creature was fed
-                }
+            // Check if player's body is eaten.
+            Mouth hostileMouth = creature.getMouth();
+            Edible ediblePlayerSegment = player.checkCollisionsWithMouth(hostileMouth);
+            if(ediblePlayerSegment != null) {
+                ediblePlayerSegment.isEatenBy(creature);
             }
-
-            for(PeacefulCell c : edibleCells) {
-                if(Entity.intersects(c, mouth)) {
-                    c.isEatenBy(creature);
-                    break;
-                }
-
+            
+            // Check if player eats any hostile body segment
+            Edible edibleHostileSegment = creature.checkCollisionsWithMouth(playerMouth);
+            if(edibleHostileSegment != null) {
+                edibleHostileSegment.isEatenBy(player);
             }
-
+            
             creature.update();
         }
+         
+
+        // Check collisions between hostile and peaceful cells
         for(Entity e: edibleCells) {
             e.update();
         }
+        player.update();
     }
 
     public void drawEntities(Graphics2D g2) {
+        player.draw(g2);
         for(Entity e: edibleCells) {
             e.draw(g2);
         }
