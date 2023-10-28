@@ -24,8 +24,6 @@ public class PeacefulCell extends Entity implements Edible {
         g2.drawOval((int)pos.x, (int)pos.y, 32, 32);
     }
 
-
-
     @Override
     public void isEatenBy(HostileCreature entity) {
         entity.eat(foodValue);

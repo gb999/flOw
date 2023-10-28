@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import entities.Edible;
 import entities.Entity;
@@ -40,22 +41,36 @@ class Level {
             if(edibleHostileSegment != null) {
                 edibleHostileSegment.isEatenBy(player);
             }
-            
             creature.update();
         }
 
         // Check collisions between hostile and peaceful cells
-        for(Edible e: edibleCells) {
+        // Using an iterator makes it safe to remove elements while iterating 
+        
+        Iterator<PeacefulCell> it = edibleCells.iterator();
+        while(it.hasNext()) {
+            PeacefulCell e = it.next();
+            ((Entity)e).update();
+
+            // Check if player eats cell 
             if(Entity.intersects(playerMouth, (Entity)e)) {
                 e.isEatenBy(player);
+                it.remove();
+                continue; // Food can only ne eaten once 
             }
+            
+            // Check if hostile creature eats cell 
             for(HostileCreature h: hostileCreatures) {
                 if(Entity.intersects((Entity)h.getMouth(), (Entity)e)) {
                     e.isEatenBy(h);
+                    it.remove();
+                    break; // Food can only ne eaten once
                 }
             }
-            ((Entity)e).update();
+
         }
+        
+
         if(player != null) {
             player.update();
         }
