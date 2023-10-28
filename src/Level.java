@@ -17,7 +17,7 @@ class Level {
     public Player player;
 
     public Level() {
-        this.color = new Color(0, 255, 0, 150);
+        this.color = new Color(100, 100, 255);
         edibleCells = new ArrayList<>();
         hostileCreatures = new ArrayList<>();
         
@@ -49,11 +49,15 @@ class Level {
         for(Entity e: edibleCells) {
             e.update();
         }
-        player.update();
+        if(player != null) {
+            player.update();
+        }
     }
 
     public void drawEntities(Graphics2D g2) {
-        player.draw(g2);
+        if(player != null) {
+            player.draw(g2);
+        }
         for(Entity e: edibleCells) {
             e.draw(g2);
         }

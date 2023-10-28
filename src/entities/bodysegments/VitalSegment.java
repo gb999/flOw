@@ -1,5 +1,4 @@
 package entities.bodysegments;
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 import entities.Edible;
@@ -16,7 +15,6 @@ public class VitalSegment extends BodySegment implements Edible {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.WHITE);
         g2.fillOval((int)pos.x-9, (int)pos.y-9, 19, 19);
 
     }

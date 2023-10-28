@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -23,9 +24,12 @@ public class GameCanvas extends JPanel {
         // Background
         g2.setColor(game.currentLevel.color);
         g2.fillRect(0, 0,  getWidth(), getHeight());
-
-
+        
+        g2.setColor(Color.WHITE);
         game.currentLevel.drawEntities(g2);
+
+        g2.setColor(new Color(0255,255,255,100));
+        game.nextLevel.drawEntities(g2);
 
 
         g2.dispose();

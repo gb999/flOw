@@ -7,7 +7,7 @@ public class Game implements Runnable {
     private GameCanvas canvas;
     private JFrame window;
     protected Level currentLevel;
-    private Level nextLevel;
+    protected Level nextLevel;
     private Level levels[];
     private Player player;
 
@@ -28,10 +28,12 @@ public class Game implements Runnable {
 
     public Game() {
         initUI();
-        gameThread = new Thread(this);
         currentLevel = new Level();
+        currentLevel.hostileCreatures.remove(0);
+        nextLevel = new Level();
         player = new Player(new Vec2(this.window.getWidth()/2, this.window.getHeight()/2));
         currentLevel.player = player;
+        gameThread = new Thread(this);
     }
 
     public void start() {
