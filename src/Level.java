@@ -43,11 +43,18 @@ class Level {
             
             creature.update();
         }
-         
 
         // Check collisions between hostile and peaceful cells
-        for(Entity e: edibleCells) {
-            e.update();
+        for(Edible e: edibleCells) {
+            if(Entity.intersects(playerMouth, (Entity)e)) {
+                e.isEatenBy(player);
+            }
+            for(HostileCreature h: hostileCreatures) {
+                if(Entity.intersects((Entity)h.getMouth(), (Entity)e)) {
+                    e.isEatenBy(h);
+                }
+            }
+            ((Entity)e).update();
         }
         if(player != null) {
             player.update();

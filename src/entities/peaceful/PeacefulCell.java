@@ -29,7 +29,6 @@ public class PeacefulCell extends Entity implements Edible {
     @Override
     public void isEatenBy(HostileCreature entity) {
         entity.eat(foodValue);
-        System.out.println("eafaf");
     };
 
 }
