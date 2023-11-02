@@ -9,7 +9,7 @@ import util.Vec2;
 
 public class VitalSegment extends BodySegment implements Edible {
     private int saturation = 0;
-    public VitalSegment(Entity owner, Vec2 pos) {
+    public VitalSegment(HostileCreature owner, Vec2 pos) {
         super(owner, pos);
     }
 
@@ -24,6 +24,7 @@ public class VitalSegment extends BodySegment implements Edible {
     public void isEatenBy(HostileCreature entity) {
         entity.eat(saturation + 1);
         // Remove bodysegment
+        owner.segmentEaten(this);
     }
     
 }

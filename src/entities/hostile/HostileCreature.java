@@ -13,4 +13,6 @@ public abstract class HostileCreature extends Entity {
     public abstract Mouth getMouth();
     
     public abstract Edible checkCollisionsWithMouth(Mouth m);
+
+    public abstract void segmentEaten(Edible b);
 }

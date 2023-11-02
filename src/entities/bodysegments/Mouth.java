@@ -3,11 +3,12 @@ package entities.bodysegments;
 import java.awt.Graphics2D;
 
 import entities.Entity;
+import entities.hostile.HostileCreature;
 import entities.Edible;
 import util.Vec2;
 
 public class Mouth extends BodySegment {
-    public Mouth(Entity owner, Vec2 pos) {
+    public Mouth(HostileCreature owner, Vec2 pos) {
         super(owner, pos);
     }
 

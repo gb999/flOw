@@ -23,6 +23,7 @@ class Level {
         hostileCreatures = new ArrayList<>();
         
         hostileCreatures.add(new ChainCreature(new Vec2(270, 500)));
+        hostileCreatures.get(0).applyForce(new Vec2(0.1,0));
         edibleCells.add(new PeacefulCell(new Vec2(500, 500), 0));
     }
     public void update() {

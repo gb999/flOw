@@ -100,4 +100,9 @@ public class ChainCreature extends HostileCreature {
     public Mouth getMouth() {
         return mouth;
     }
+
+    @Override
+    public void segmentEaten(Edible b) {
+        body.remove(b);
+    }
 }

@@ -29,7 +29,6 @@ public class Game implements Runnable {
     public Game() {
         initUI();
         currentLevel = new Level();
-        currentLevel.hostileCreatures.remove(0);
         nextLevel = new Level();
         player = new Player(new Vec2(this.window.getWidth()/2, this.window.getHeight()/2));
         currentLevel.player = player;

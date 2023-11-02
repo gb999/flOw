@@ -1,12 +1,13 @@
 package entities.bodysegments;
 
 import entities.Entity;
+import entities.hostile.HostileCreature;
 import util.Vec2;
 
 public abstract class BodySegment extends Entity  {
-    protected Entity owner;
+    protected HostileCreature owner;
     
-    public BodySegment(Entity owner, Vec2 pos) {
+    public BodySegment(HostileCreature owner, Vec2 pos) {
         super(pos);
         this.owner = owner;
         this.pos = new Vec2(pos);

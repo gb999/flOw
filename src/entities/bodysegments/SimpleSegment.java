@@ -3,12 +3,13 @@ package entities.bodysegments;
 import java.awt.Graphics2D;
 
 import entities.Entity;
+import entities.hostile.HostileCreature;
 import util.Vec2;
 
 public class SimpleSegment extends BodySegment {
     static final int radius = 12;
     int saturation = 0;
-    public SimpleSegment(Entity owner, Vec2 pos) {
+    public SimpleSegment(HostileCreature owner, Vec2 pos) {
         super(owner, pos);
         saturation = 0;
     }
