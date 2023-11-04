@@ -101,8 +101,18 @@ public class ChainCreature extends HostileCreature {
         return mouth;
     }
 
+    private boolean isAlive() {
+        for(Edible e : getEdibleSegments()) {
+            if (e.getFoodValue() > 0) return true;
+        }
+        return false;
+    }
+    
     @Override
     public void segmentEaten(Edible b) {
-        body.remove(b);
+        if(!isAlive()) {
+            // Change level, 
+            System.out.println("dead");
+        };
     }
 }
