@@ -1,4 +1,4 @@
-
+package flow;
 import javax.swing.JFrame;
 
 import util.Vec2;
@@ -6,8 +6,8 @@ import util.Vec2;
 public class Game implements Runnable {
     private GameCanvas canvas;
     private JFrame window;
-    protected Level currentLevel;
-    protected Level nextLevel;
+    public static Level currentLevel;
+    protected static Level nextLevel;
     private Level levels[];
     private Player player;
 
@@ -21,7 +21,7 @@ public class Game implements Runnable {
         window.setLocationRelativeTo(null);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        canvas = new GameCanvas(this);
+        canvas = new GameCanvas();
         window.add(canvas);
         window.setVisible(true);
     }

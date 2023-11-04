@@ -1,8 +1,8 @@
-package entities.bodysegments;
+package flow.entities.bodysegments;
 
 import java.awt.Graphics2D;
 
-import entities.hostile.HostileCreature;
+import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 public class SimpleSegment extends BodySegment {
@@ -26,4 +26,11 @@ public class SimpleSegment extends BodySegment {
         return 1;
     }
 
+    @Override
+    public int saturate(int amount) {
+        int digestableAmount = getMaxSaturation() - saturation;
+        saturation += digestableAmount;
+        amount -= digestableAmount;
+        return amount;
+    }
 }

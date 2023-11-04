@@ -1,4 +1,4 @@
-package entities;
+package flow.entities;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;

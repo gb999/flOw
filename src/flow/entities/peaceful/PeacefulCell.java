@@ -1,10 +1,10 @@
-package entities.peaceful;
+package flow.entities.peaceful;
 
 import java.awt.Graphics2D;
 
-import entities.Edible;
-import entities.Entity;
-import entities.hostile.HostileCreature;
+import flow.entities.Edible;
+import flow.entities.Entity;
+import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 public class PeacefulCell extends Entity implements Edible {

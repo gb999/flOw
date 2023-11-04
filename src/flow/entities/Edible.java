@@ -1,7 +1,7 @@
-package entities;
+package flow.entities;
 
 
-import entities.hostile.HostileCreature;
+import flow.entities.hostile.HostileCreature;
 
 public interface Edible {
     public int getFoodValue();

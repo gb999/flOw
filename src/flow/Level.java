@@ -1,21 +1,25 @@
+package flow;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import entities.Edible;
-import entities.Entity;
-import entities.bodysegments.Mouth;
-import entities.hostile.ChainCreature;
-import entities.hostile.HostileCreature;
-import entities.peaceful.PeacefulCell;
+import flow.entities.Edible;
+import flow.entities.Entity;
+import flow.entities.bodysegments.Mouth;
+import flow.entities.hostile.ChainCreature;
+import flow.entities.hostile.HostileCreature;
+import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
 
-class Level {
+public class Level {
     protected Color color;    
     public ArrayList<PeacefulCell> edibleCells;
     public ArrayList<HostileCreature> hostileCreatures;
     public Player player;
+    public void addEdible(PeacefulCell p) {
+        edibleCells.add(p);
+    }
 
     public Level() {
         this.color = new Color(100, 100, 255);
@@ -24,7 +28,13 @@ class Level {
         
         hostileCreatures.add(new ChainCreature(new Vec2(270, 500)));
         hostileCreatures.get(0).applyForce(new Vec2(0.1,0));
-        edibleCells.add(new PeacefulCell(new Vec2(500, 500), 0));
+        edibleCells.add(new PeacefulCell(new Vec2(500, 500), 1));
+        edibleCells.add(new PeacefulCell(new Vec2(600, 500), 1));
+        edibleCells.add(new PeacefulCell(new Vec2(700, 500), 1));
+        edibleCells.add(new PeacefulCell(new Vec2(800, 500), 1));
+        edibleCells.add(new PeacefulCell(new Vec2(900, 500), 1));
+        edibleCells.add(new PeacefulCell(new Vec2(1000, 500), 1));
+        edibleCells.add(new PeacefulCell(new Vec2(1100, 500), 1));
     }
     public void update() {
         // Check collisions between player and hostile creatures

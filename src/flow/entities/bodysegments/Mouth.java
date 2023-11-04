@@ -1,9 +1,9 @@
-package entities.bodysegments;
+package flow.entities.bodysegments;
 
 import java.awt.Graphics2D;
 
-import entities.hostile.HostileCreature;
-import entities.Edible;
+import flow.entities.Edible;
+import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 public class Mouth extends BodySegment {
@@ -18,11 +18,15 @@ public class Mouth extends BodySegment {
     }
 
     public boolean checkCollision(Edible e) {
-        
         return true;
     }
 
     public int getMaxSaturation() {
         return 0;
+    }
+
+    @Override
+    public int saturate(int amount) {
+        return amount;
     }
 }

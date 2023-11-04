@@ -1,23 +1,28 @@
-package entities.hostile;
+package flow.entities.hostile;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-import entities.Edible;
-import entities.Entity;
-import entities.bodysegments.BodySegment;
-import entities.bodysegments.Mouth;
-import entities.bodysegments.SimpleSegment;
-import entities.bodysegments.VitalSegment;
+import flow.entities.Edible;
+import flow.entities.Entity;
+import flow.entities.bodysegments.BodySegment;
+import flow.entities.bodysegments.Mouth;
+import flow.entities.bodysegments.SimpleSegment;
+import flow.entities.bodysegments.VitalSegment;
+import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
+import flow.Game;
+
 
 public class ChainCreature extends HostileCreature {
     LinkedList<BodySegment> body;
     Mouth mouth;
+    private boolean digesting;
     public ChainCreature(Vec2 pos) {
         super(pos);
+        digesting = false;
         body = new LinkedList<BodySegment>();
         mouth = new Mouth(this, pos);
         body.add(mouth);
@@ -26,23 +31,39 @@ public class ChainCreature extends HostileCreature {
             BodySegment s = new SimpleSegment(this, new Vec2(pos.x, pos.y + i * 20));
             body.add(s);
         }
-        System.out.println((body.get(1)).getMaxSaturation());
     } 
 
     @Override
     public void eat(int foodValue) {
-        System.out.println("eaten " + foodValue);
+        // Digest
+        for(BodySegment segment : body) {
+            foodValue = segment.saturate(foodValue);
+            if(foodValue == 0) {
+                return; 
+            }
+        }
+        // Body has been filled, empty all non-edible segments, grow new segment
+        ArrayList<Edible> edibleSegments = getEdibleSegments();
+        for(BodySegment segment : body) {
+            if(edibleSegments.contains(segment)) continue;
+            segment.desaturate();
+        }
+        body.add(new SimpleSegment(this, body.getLast().pos));
+
+        if(foodValue != 0) {
+            Game.currentLevel.addEdible(new PeacefulCell(body.getLast().pos, foodValue));
+        }
+
     }
+
 
     @Override
     public void update() {
         super.update();
 
         // the Mouth pulls the whole body
-        BodySegment first = body.getFirst();
-        first.vel = this.vel;   
-        first.update();
-        this.pos = first.pos;
+        mouth.vel = this.vel;
+        this.pos = mouth.pos;
 
         // Iterate through segments
         ListIterator<BodySegment> it = body.listIterator(0);

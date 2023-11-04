@@ -1,9 +1,10 @@
+package flow;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import entities.hostile.ChainCreature;
+import flow.entities.hostile.ChainCreature;
 import util.Vec2;
 
 public class Player extends ChainCreature  implements MouseListener {

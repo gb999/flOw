@@ -1,9 +1,8 @@
-package entities.bodysegments;
+package flow.entities.bodysegments;
 import java.awt.Graphics2D;
-import java.util.function.Function;
 
-import entities.Edible;
-import entities.hostile.HostileCreature;
+import flow.entities.Edible;
+import flow.entities.hostile.HostileCreature;
 import util.Ring;
 import util.Vec2;
 
@@ -35,6 +34,15 @@ public class VitalSegment extends BodySegment implements Edible {
     public int getMaxSaturation() {
         return 2;
     }
+    @Override
+    public int saturate(int amount) {
+        int digestableAmount = getMaxSaturation() - saturation;
+        saturation += digestableAmount;
+        amount -= digestableAmount;
+        return amount;
+    }
+
+    
 
     @Override
     public void draw(Graphics2D g2) {

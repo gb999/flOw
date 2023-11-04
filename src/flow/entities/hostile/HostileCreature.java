@@ -1,8 +1,8 @@
-package entities.hostile;
+package flow.entities.hostile;
 
-import entities.Edible;
-import entities.Entity;
-import entities.bodysegments.Mouth;
+import flow.entities.Edible;
+import flow.entities.Entity;
+import flow.entities.bodysegments.Mouth;
 import util.Vec2;
 
 public abstract class HostileCreature extends Entity {

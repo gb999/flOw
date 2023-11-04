@@ -1,4 +1,4 @@
-package entities.peaceful;
+package flow.entities.peaceful;
 
 import util.Vec2;
 
