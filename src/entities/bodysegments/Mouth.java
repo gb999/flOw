@@ -2,7 +2,6 @@ package entities.bodysegments;
 
 import java.awt.Graphics2D;
 
-import entities.Entity;
 import entities.hostile.HostileCreature;
 import entities.Edible;
 import util.Vec2;
@@ -21,5 +20,9 @@ public class Mouth extends BodySegment {
     public boolean checkCollision(Edible e) {
         
         return true;
+    }
+
+    public int getMaxSaturation() {
+        return 0;
     }
 }

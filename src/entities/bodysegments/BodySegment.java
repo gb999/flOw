@@ -6,7 +6,9 @@ import util.Vec2;
 
 public abstract class BodySegment extends Entity  {
     protected HostileCreature owner;
-    
+    protected int saturation;
+
+    public abstract int getMaxSaturation();
     public BodySegment(HostileCreature owner, Vec2 pos) {
         super(pos);
         this.owner = owner;
@@ -18,4 +20,5 @@ public abstract class BodySegment extends Entity  {
     final public void update() {
         super.update();
     }
+
 }

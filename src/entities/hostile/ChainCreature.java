@@ -26,7 +26,7 @@ public class ChainCreature extends HostileCreature {
             BodySegment s = new SimpleSegment(this, new Vec2(pos.x, pos.y + i * 20));
             body.add(s);
         }
-
+        System.out.println((body.get(1)).getMaxSaturation());
     } 
 
     @Override
