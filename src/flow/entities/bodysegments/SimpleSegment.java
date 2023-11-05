@@ -29,8 +29,14 @@ public class SimpleSegment extends BodySegment {
     @Override
     public int saturate(int amount) {
         int digestableAmount = getMaxSaturation() - saturation;
-        saturation += digestableAmount;
-        amount -= digestableAmount;
+        if(amount > digestableAmount) {
+            amount -= digestableAmount ;
+            saturation += digestableAmount;
+        } else {
+            saturation += amount;
+            amount = 0;
+
+        }
         return amount;
     }
 }

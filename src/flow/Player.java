@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import flow.entities.hostile.ChainCreature;
 import util.Vec2;
 
-public class Player extends ChainCreature  implements MouseListener {
+public class Player extends ChainCreature implements MouseListener {
     boolean mouseDown = false;
     Player(Vec2 pos) {
         super(pos);
@@ -45,5 +45,9 @@ public class Player extends ChainCreature  implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
-    
+    @Override 
+    protected void die() {
+        eat(1);
+        Game.changeLevel(false);
+    }
 }

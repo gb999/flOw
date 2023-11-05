@@ -51,7 +51,7 @@ public class ChainCreature extends HostileCreature {
         body.add(new SimpleSegment(this, body.getLast().pos));
 
         if(foodValue != 0) {
-            Game.currentLevel.addEdible(new PeacefulCell(body.getLast().pos, foodValue));
+            Game.currentLevel.addEdible(new PeacefulCell(body.getLast().pos, foodValue)); 
         }
 
     }
@@ -132,8 +132,11 @@ public class ChainCreature extends HostileCreature {
     @Override
     public void segmentEaten(Edible b) {
         if(!isAlive()) {
-            // Change level, 
-            System.out.println("dead");
+            die();
         };
+    }
+    protected void die() {
+        System.out.println("dead");
+
     }
 }

@@ -25,13 +25,13 @@ public class PeacefulCell extends Entity implements Edible {
     }
 
     @Override
-    public void isEatenBy(HostileCreature entity) {
-        entity.eat(foodValue);
+    public int getFoodValue() {
+        return foodValue;
     }
 
     @Override
-    public int getFoodValue() {
-        return foodValue;
+    public void isEaten() {
+        
     };
     
 

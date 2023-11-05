@@ -18,9 +18,8 @@ public class VitalSegment extends BodySegment implements Edible {
 
     
     @Override
-    public void isEatenBy(HostileCreature entity) {
+    public void isEaten() {
         if(saturation == 0) return;
-        entity.eat(saturation);
         saturation = 0;
         owner.segmentEaten(this);
     }

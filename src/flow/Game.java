@@ -11,6 +11,10 @@ public class Game implements Runnable {
     private Level levels[];
     private Player player;
 
+    public static void changeLevel(boolean next) {
+
+    }
+
     private double FPS = 30;
     private Thread gameThread;
 

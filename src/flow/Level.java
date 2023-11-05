@@ -1,8 +1,11 @@
 package flow;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Queue;
+import java.util.Stack;
 
 import flow.entities.Edible;
 import flow.entities.Entity;
@@ -17,11 +20,18 @@ public class Level {
     public ArrayList<PeacefulCell> edibleCells;
     public ArrayList<HostileCreature> hostileCreatures;
     public Player player;
+    private Stack<PeacefulCell> spawnEdibleStack; // Contents odf stack will be spawned on nexct iteration of update loop
+
+    /**
+     * Adds peaceful cell to spawn stack
+     * @param p
+     */    
     public void addEdible(PeacefulCell p) {
-        edibleCells.add(p);
+        spawnEdibleStack.add(p);
     }
 
     public Level() {
+        spawnEdibleStack = new Stack<>();
         this.color = new Color(100, 100, 255);
         edibleCells = new ArrayList<>();
         hostileCreatures = new ArrayList<>();
@@ -37,6 +47,9 @@ public class Level {
         edibleCells.add(new PeacefulCell(new Vec2(1100, 500), 1));
     }
     public void update() {
+        while(!spawnEdibleStack.isEmpty()) {
+            edibleCells.add(spawnEdibleStack.pop());
+        }
         // Check collisions between player and hostile creatures
         Mouth playerMouth = player.getMouth();  
         for(HostileCreature creature: hostileCreatures) {
@@ -44,13 +57,15 @@ public class Level {
             Mouth hostileMouth = creature.getMouth();
             Edible ediblePlayerSegment = player.checkCollisionsWithMouth(hostileMouth);
             if(ediblePlayerSegment != null) {
-                ediblePlayerSegment.isEatenBy(creature);
+                creature.eat(ediblePlayerSegment.getFoodValue());
+                ediblePlayerSegment.isEaten();
             }
             
             // Check if player eats any hostile body segment
             Edible edibleHostileSegment = creature.checkCollisionsWithMouth(playerMouth);
             if(edibleHostileSegment != null) {
-                edibleHostileSegment.isEatenBy(player);
+                player.eat(edibleHostileSegment.getFoodValue());
+                edibleHostileSegment.isEaten();
             }
             creature.update();
         }
@@ -58,27 +73,28 @@ public class Level {
         // Check collisions between hostile and peaceful cells
         // Using an iterator makes it safe to remove elements while iterating 
         
-        Iterator<PeacefulCell> it = edibleCells.iterator();
-        while(it.hasNext()) {
+        
+        for(Iterator<PeacefulCell> it = edibleCells.iterator(); it.hasNext();  ) {
             PeacefulCell e = it.next();
             ((Entity)e).update();
 
             // Check if player eats cell 
             if(Entity.intersects(playerMouth, (Entity)e)) {
-                e.isEatenBy(player);
                 it.remove();
+                player.eat(e.getFoodValue());            
+                e.isEaten();
                 continue; // Food can only ne eaten once 
             }
             
             // Check if hostile creature eats cell 
             for(HostileCreature h: hostileCreatures) {
                 if(Entity.intersects((Entity)h.getMouth(), (Entity)e)) {
-                    e.isEatenBy(h);
                     it.remove();
+                    h.eat(e.getFoodValue());
+                    e.isEaten();
                     break; // Food can only ne eaten once
                 }
             }
-
         }
         
 
