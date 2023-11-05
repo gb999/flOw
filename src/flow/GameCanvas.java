@@ -12,10 +12,6 @@ public class GameCanvas extends JPanel {
         canvas = this;
     }
 
-
-    public void update() {
-
-    }
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -30,11 +26,8 @@ public class GameCanvas extends JPanel {
         g2.setColor(new Color(0255,255,255,100));
         Game.nextLevel.drawEntities(g2);
 
-
         g2.dispose();
     }
-
-
 
 
 }

@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import flow.entities.bodysegments.BodySegment;
 import flow.entities.hostile.ChainCreature;
 import util.Vec2;
 
@@ -47,6 +48,9 @@ public class Player extends ChainCreature implements MouseListener {
     }
     @Override 
     protected void die() {
+        for(BodySegment b : body) {
+            b.desaturate();
+        } 
         eat(1);
         Game.changeLevel(false);
     }

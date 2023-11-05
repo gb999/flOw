@@ -17,7 +17,7 @@ import flow.Game;
 
 
 public class ChainCreature extends HostileCreature {
-    LinkedList<BodySegment> body;
+    protected LinkedList<BodySegment> body;
     Mouth mouth;
     private boolean digesting;
     public ChainCreature(Vec2 pos) {

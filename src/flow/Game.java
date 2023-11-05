@@ -9,9 +9,13 @@ public class Game implements Runnable {
     public static Level currentLevel;
     protected static Level nextLevel;
     private Level levels[];
-    private Player player;
+    private static Player player;
 
     public static void changeLevel(boolean next) {
+        currentLevel = nextLevel;
+        currentLevel.player = player;
+
+        nextLevel = new Level(); //load next
 
     }
 
@@ -45,7 +49,6 @@ public class Game implements Runnable {
 
 
     public void update() {
-        canvas.update();
         currentLevel.update();
     }
 
