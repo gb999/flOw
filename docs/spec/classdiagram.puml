@@ -34,8 +34,6 @@ package entities.hostile {
         
         + boolean isAlive()
         + void getRemains()
-
-
     }
 }
 
