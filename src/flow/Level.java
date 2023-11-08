@@ -68,12 +68,13 @@ public class Level {
                 edibleHostileSegment.isEaten();
             }
             creature.update();
+            if(!creature.isAlive()) {
+                // remove creature from entites
+            }
         }
 
         // Check collisions between hostile and peaceful cells
-        // Using an iterator makes it safe to remove elements while iterating 
-        
-        
+        // Using an iterator makes it safe to remove elements while iterating   
         for(Iterator<PeacefulCell> it = edibleCells.iterator(); it.hasNext();  ) {
             PeacefulCell e = it.next();
             ((Entity)e).update();

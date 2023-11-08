@@ -1,11 +1,67 @@
-class Entity {
+@startuml
+package entities {
+    abstract class Entity {
+        - Vec2 pos
+        - Vec2 vel
+        - Vec2 acc
+
+        + update()
+        + render()
+    }
+
+    interface Edible {
+        + int getFoodValue()
+        + void isEatenBy(HostileCreature)
+    } 
+}
+
+package entities.bodysegments {
+    abstract BodySegment extends entities.Entity {
+        + HostileCreature owner;
+        ~ int maxSaturation
+        ~ int saturation
+        + int saturate(foodValue)
+        + void desaturate()
+
+    } 
+}
+
+package entities.hostile {
+    abstract class HostileCreature {
+        + Mouth getMouth()
+        + Edible checkCollisionsWithMouth(Mouth)
+        
+        + void eat(Edible)
+        + void segmentEaten(BodySegment)
+        
+        + boolean isAlive()
+        + void spawnRemains()
+
+
+    }
+}
+
+package entities.peaceful {
 
 }
 
-class SimpleCell 
-class NextLevel 
+package util {
+    class Ring {
+        static Shape create ()
+    }
+    class Vec2 {
+        double x
+        double y
+    }
+}
 
-BlueCell -|> SimpleCell
-RedCell  -|> SimpleCell
-SimpleCell --|> Entity
-SnakeFish --|> Entity
+
+class Game {
+}
+
+class Level {
+
+}
+
+
+@enduml

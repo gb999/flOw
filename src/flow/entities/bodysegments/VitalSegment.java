@@ -11,7 +11,7 @@ public class VitalSegment extends BodySegment implements Edible {
 
     public VitalSegment(HostileCreature owner, Vec2 pos) {
         super(owner, pos);
-        saturation = 2;
+        saturation = 0;
         r = 12;
     }
 
@@ -20,7 +20,6 @@ public class VitalSegment extends BodySegment implements Edible {
     @Override
     public void isEaten() {
         if(saturation == 0) return;
-        saturation = 0;
         owner.segmentEaten(this);
     }
 

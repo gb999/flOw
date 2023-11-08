@@ -6,7 +6,7 @@ A játék a megjelenítéshez egy Canvas objektumot használok. Egy végtelen ci
 class Level {
     - ArrayList Entities 
 } 
-static class Game {
+class Game {
     - Canvas 
     - Level currentLevel   
     - Level nextLevel

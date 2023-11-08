@@ -26,7 +26,7 @@ public class ChainCreature extends HostileCreature {
         body = new LinkedList<BodySegment>();
         mouth = new Mouth(this, pos);
         body.add(mouth);
-        body.add(new VitalSegment(this, new Vec2(pos.x, pos.y )));
+        body.add(new VitalSegment(this, new Vec2(pos.x, pos.y)));
         for(int i = 0; i < 8; i++) {
             BodySegment s = new SimpleSegment(this, new Vec2(pos.x, pos.y + i * 20));
             body.add(s);
@@ -122,7 +122,7 @@ public class ChainCreature extends HostileCreature {
         return mouth;
     }
 
-    private boolean isAlive() {
+    public boolean isAlive() {
         for(Edible e : getEdibleSegments()) {
             if (e.getFoodValue() > 0) return true;
         }
@@ -135,6 +135,9 @@ public class ChainCreature extends HostileCreature {
             die();
         };
     }
+    /**
+     * Spawn cells on death
+     */
     protected void die() {
         System.out.println("dead");
 
