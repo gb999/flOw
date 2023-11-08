@@ -5,29 +5,46 @@ import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 public abstract class BodySegment extends Entity  {
-    protected HostileCreature owner;
-    protected int saturation;
-
-    public abstract int getMaxSaturation();
-    public int getSaturation() {
-        return saturation;
-    }
-    public void desaturate() {
-        saturation = 0;
-    }
-
-    // Saturates segment, if fully saturated returns remaining food amount
-    public abstract int saturate(int amount);
     
     
     public BodySegment(HostileCreature owner, Vec2 pos) {
         super(pos);
-        this.owner = owner;
         this.pos = new Vec2(pos);
     }
 
     /**
-     * BodySegemnts should be updated by the owner. They should not update themselves
+     * Maximum saturation of this segment. 
+     * Children of this class should define their own maxSaturation.  
+     */
+    protected int maxSaturation;
+    
+    /**
+     * Stores current value of this segment's saturation.
+     */
+    protected int saturation;
+    
+    /**
+     * Sets this segment's current saturation to 0.
+     */
+    public void desaturate() {
+        saturation = 0;
+    }
+
+    /**
+     * Saturates this segment with given amount of food. 
+     * If amount is enough sets saturation to max value.
+     * If amount is not enough uses the remaining food.
+     * @param amount
+     * @return remaining amount of food
+     */
+    public abstract int saturate(int amount);
+    
+    
+
+
+    /**
+     * BodySegments are updated by the creature owning this segment. 
+     * This method should not be overridden.
      */
     final public void update() {
         super.update();

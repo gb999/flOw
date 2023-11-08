@@ -1,5 +1,8 @@
 package flow.entities.hostile;
 
+
+import java.util.List;
+
 import flow.entities.Edible;
 import flow.entities.Entity;
 import flow.entities.bodysegments.Mouth;
@@ -9,12 +12,38 @@ public abstract class HostileCreature extends Entity {
     public HostileCreature(Vec2 pos) {
         super(pos);
     }
+    /**
+     * @return Mouth of this creature
+     */
     public abstract Mouth getMouth();
-    
-    public abstract void eat(int foodValue);
-    public abstract Edible checkCollisionsWithMouth(Mouth m);
 
-    public abstract void segmentEaten(Edible b);
+    /**
+     * Returns the first Edible segment of this creature colliding with mouth or null if there is no collision.
+     * @param mouth mouth to check collisions with
+     * @return first colliding edible segment of this creature or null if there is none. 
+     */
+    public abstract Edible checkCollisionsWithMouth(Mouth mouth);
+    
+    /**
+     * Saturates this creature's body with food's foodValue amount of food. Calls food's isEatenBy() method. 
+     * If body is fully saturated grows a new body segment. 
+     * If foodValue amount of food can't be used to saturate body,
+     * spawns a simple cell with the remaining food value.
+     * @param food to be eaten.
+     */
+    public abstract void eat(Edible food);
+
+
+    /**
+     * @return true if the creature is alive
+     */
     public abstract boolean isAlive();
+
+
+    /**
+     * Called when creature dies.
+     * @return a list of edible cells, to be spawned.
+     */
+    public abstract List<Edible> getRemains();
 
 }

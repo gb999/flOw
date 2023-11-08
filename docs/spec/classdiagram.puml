@@ -17,7 +17,6 @@ package entities {
 
 package entities.bodysegments {
     abstract BodySegment extends entities.Entity {
-        + HostileCreature owner;
         ~ int maxSaturation
         ~ int saturation
         + int saturate(foodValue)
@@ -32,10 +31,9 @@ package entities.hostile {
         + Edible checkCollisionsWithMouth(Mouth)
         
         + void eat(Edible)
-        + void segmentEaten(BodySegment)
         
         + boolean isAlive()
-        + void spawnRemains()
+        + void getRemains()
 
 
     }
