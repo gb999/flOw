@@ -5,9 +5,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import flow.entities.bodysegments.BodySegment;
+import flow.entities.bodysegments.VitalSegment;
 import flow.entities.hostile.ChainCreature;
 import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
+
 
 public class Player extends ChainCreature implements MouseListener {
     boolean mouseDown = false;

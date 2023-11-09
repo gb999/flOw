@@ -6,7 +6,7 @@ import util.Vec2;
 public abstract class BodySegment extends Entity  {
     
     
-    public BodySegment(Vec2 pos) {
+    protected BodySegment(Vec2 pos) {
         super(pos);
         this.pos = new Vec2(pos);
     }
@@ -37,10 +37,10 @@ public abstract class BodySegment extends Entity  {
      * @return remaining amount of food
      */
     public final int saturate(int amount) {
-            int digestableAmount = maxSaturation - saturation;
+        int digestableAmount = maxSaturation - saturation;
         int digestedAmount = Math.min(amount, digestableAmount);
         saturation += digestedAmount;
-        return amount - digestableAmount;
+        return amount - digestedAmount;
     }
     
 
@@ -49,7 +49,8 @@ public abstract class BodySegment extends Entity  {
      * BodySegments are updated by the creature owning this segment. 
      * This method should not be overridden.
      */
-    final public void update() {
+    @Override
+    public final void update() {
         super.update();
     }
 

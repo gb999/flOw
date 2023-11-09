@@ -21,7 +21,7 @@ public class ChainCreature extends HostileCreature {
     Mouth mouth;
     public ChainCreature(Vec2 pos) {
         super(pos);
-        body = new LinkedList<BodySegment>();
+        body = new LinkedList<>();
         mouth = new Mouth(this, pos);
         body.add(mouth);
         body.add(new VitalSegment(new Vec2(pos.x, pos.y), true));
@@ -60,9 +60,7 @@ public class ChainCreature extends HostileCreature {
         }
 
         return null;
-
     }
-
 
     @Override
     public void update() {

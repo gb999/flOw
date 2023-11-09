@@ -11,7 +11,7 @@ import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
 
 public abstract class HostileCreature extends Entity {
-    public HostileCreature(Vec2 pos) {
+    protected HostileCreature(Vec2 pos) {
         super(pos);
     }
     /**

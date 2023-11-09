@@ -23,7 +23,7 @@ public class GameCanvas extends JPanel {
         g2.setColor(Color.WHITE);
         Game.currentLevel.drawEntities(g2);
 
-        g2.setColor(new Color(0255,255,255,100));
+        g2.setColor(new Color(255,255,255,100));
         Game.nextLevel.drawEntities(g2);
 
         g2.dispose();

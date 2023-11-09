@@ -11,6 +11,7 @@ import flow.entities.bodysegments.Mouth;
 import flow.entities.hostile.ChainCreature;
 import flow.entities.hostile.HostileCreature;
 import flow.entities.peaceful.PeacefulCell;
+import util.Ring;
 import util.Vec2;
 
 public class Level {
@@ -65,6 +66,7 @@ public class Level {
                 if(!player.isAlive()) {
                     player.die();
                     System.out.println("PLAYER DIED CHANGE LEVEL");
+                    Game.changeLevel(false);
                     break;
                 }
             }
