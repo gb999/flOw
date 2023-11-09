@@ -108,16 +108,11 @@ public class Level {
             }
         }
 
-        if(player != null) {
-            player.update();
-        }
     }
 
 
     public void drawEntities(Graphics2D g2) {
-        if(player != null) {
-            player.draw(g2);
-        }
+
         for(Entity e: edibleCells) {
             e.draw(g2);
         }
