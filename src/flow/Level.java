@@ -1,10 +1,8 @@
 package flow;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Queue;
 import java.util.Stack;
 
 import flow.entities.Edible;
@@ -112,6 +110,7 @@ public class Level {
             player.update();
         }
     }
+
 
     public void drawEntities(Graphics2D g2) {
         if(player != null) {
