@@ -1,11 +1,13 @@
 package flow.entities.hostile;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import flow.entities.Edible;
 import flow.entities.Entity;
 import flow.entities.bodysegments.Mouth;
+import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
 
 public abstract class HostileCreature extends Entity {
@@ -25,13 +27,14 @@ public abstract class HostileCreature extends Entity {
     public abstract Edible checkCollisionsWithMouth(Mouth mouth);
     
     /**
-     * Saturates this creature's body with food's foodValue amount of food. Calls food's isEatenBy() method. 
+     * Saturates this creature's body with food's foodValue amount of food. THEN calls food's isEatenBy() method. 
      * If body is fully saturated grows a new body segment. 
      * If foodValue amount of food can't be used to saturate body,
-     * spawns a simple cell with the remaining food value.
+     * returns a new edible cell with the remaining food value.
      * @param food to be eaten.
+     * @return a new edible cell to be spawned if there is remaining food
      */
-    public abstract void eat(Edible food);
+    public abstract PeacefulCell eat(Edible food);
 
 
     /**
@@ -41,9 +44,12 @@ public abstract class HostileCreature extends Entity {
 
 
     /**
-     * Called when creature dies.
-     * @return a list of edible cells, to be spawned.
+     * Called when creature dies. Override this if creature needs 
+     * to spawn peaceful cells cells on death.
+     * @return a list of edible cells, to be spawned. (Or an empty list if nothing has to be spawned)
      */
-    public abstract List<Edible> getRemains();
+    public List<PeacefulCell> getRemains() {
+        return new ArrayList<PeacefulCell>();
+    };
 
 }

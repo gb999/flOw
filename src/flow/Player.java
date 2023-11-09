@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 
 import flow.entities.bodysegments.BodySegment;
 import flow.entities.hostile.ChainCreature;
+import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
 
 public class Player extends ChainCreature implements MouseListener {
@@ -46,12 +47,15 @@ public class Player extends ChainCreature implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
-    @Override 
+
+    /**
+     * Called when player dies.
+     * Desaturates all body segments except one.
+     */
     protected void die() {
         for(BodySegment b : body) {
             b.desaturate();
-        } 
-        eat(1);
-        Game.changeLevel(false);
+        }
+        eat(new PeacefulCell(pos, 1)); 
     }
 }

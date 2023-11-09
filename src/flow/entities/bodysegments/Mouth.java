@@ -7,8 +7,12 @@ import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 public class Mouth extends BodySegment {
+    {
+        maxSaturation = 0;
+        saturation = 0;
+    }
     public Mouth(HostileCreature owner, Vec2 pos) {
-        super(owner, pos);
+        super(pos);
     }
 
     public void draw(Graphics2D g2) {
@@ -23,10 +27,5 @@ public class Mouth extends BodySegment {
 
     public int getMaxSaturation() {
         return 0;
-    }
-
-    @Override
-    public int saturate(int amount) {
-        return amount;
     }
 }

@@ -3,6 +3,7 @@ package flow.entities.hostile;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 
 import flow.entities.Edible;
@@ -13,46 +14,52 @@ import flow.entities.bodysegments.SimpleSegment;
 import flow.entities.bodysegments.VitalSegment;
 import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
-import flow.Game;
 
 
 public class ChainCreature extends HostileCreature {
     protected LinkedList<BodySegment> body;
     Mouth mouth;
-    private boolean digesting;
     public ChainCreature(Vec2 pos) {
         super(pos);
-        digesting = false;
         body = new LinkedList<BodySegment>();
         mouth = new Mouth(this, pos);
         body.add(mouth);
-        body.add(new VitalSegment(this, new Vec2(pos.x, pos.y)));
+        body.add(new VitalSegment(new Vec2(pos.x, pos.y), true));
         for(int i = 0; i < 8; i++) {
-            BodySegment s = new SimpleSegment(this, new Vec2(pos.x, pos.y + i * 20));
+            BodySegment s = new SimpleSegment(new Vec2(pos.x, pos.y + i * 20));
             body.add(s);
         }
     } 
 
     @Override
-    public void eat(int foodValue) {
+    public PeacefulCell eat(Edible food) {
         // Digest
+        int foodValue = food.getFoodValue();
         for(BodySegment segment : body) {
-            foodValue = segment.saturate(foodValue);
-            if(foodValue == 0) {
-                return; 
+            // If foodValue reaches 0 before iteration finishes, 
+            // then digesting is done. 
+            if(foodValue == 0) { 
+                food.isEatenBy(this);
+                return null;
             }
+            foodValue = segment.saturate(foodValue);
         }
-        // Body has been filled, empty all non-edible segments, grow new segment
+        food.isEatenBy(this);
+
+        // Body has been filled, desaturate all non-edible segments, grow new segment
         ArrayList<Edible> edibleSegments = getEdibleSegments();
         for(BodySegment segment : body) {
             if(edibleSegments.contains(segment)) continue;
             segment.desaturate();
         }
-        body.add(new SimpleSegment(this, body.getLast().pos));
+        body.add(new SimpleSegment(body.getLast().pos));
 
+        // If there is remaining food spawn simple cell
         if(foodValue != 0) {
-            Game.currentLevel.addEdible(new PeacefulCell(body.getLast().pos, foodValue)); 
+           return new PeacefulCell(body.getLast().pos, foodValue); 
         }
+
+        return null;
 
     }
 
@@ -101,7 +108,6 @@ public class ChainCreature extends HostileCreature {
         }
         return edibleSegments;
     }
-
     
     /**
      * Checks if any edible body segment is colliding with the given mouth.
@@ -129,17 +135,11 @@ public class ChainCreature extends HostileCreature {
         return false;
     }
     
-    @Override
-    public void segmentEaten(Edible b) {
-        if(!isAlive()) {
-            die();
-        };
-    }
+
     /**
      * Spawn cells on death
      */
-    protected void die() {
-        System.out.println("dead");
-
+    public List<PeacefulCell> getRemains() {
+        return new ArrayList<>();
     }
 }

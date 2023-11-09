@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 
 import flow.entities.Edible;
 import flow.entities.Entity;
-import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 public class PeacefulCell extends Entity implements Edible {
@@ -28,11 +27,4 @@ public class PeacefulCell extends Entity implements Edible {
     public int getFoodValue() {
         return foodValue;
     }
-
-    @Override
-    public void isEaten() {
-        
-    };
-    
-
 }

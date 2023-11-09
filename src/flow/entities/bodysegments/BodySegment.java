@@ -1,13 +1,12 @@
 package flow.entities.bodysegments;
 
 import flow.entities.Entity;
-import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 public abstract class BodySegment extends Entity  {
     
     
-    public BodySegment(HostileCreature owner, Vec2 pos) {
+    public BodySegment(Vec2 pos) {
         super(pos);
         this.pos = new Vec2(pos);
     }
@@ -26,7 +25,7 @@ public abstract class BodySegment extends Entity  {
     /**
      * Sets this segment's current saturation to 0.
      */
-    public void desaturate() {
+    public final void desaturate() {
         saturation = 0;
     }
 
@@ -37,8 +36,12 @@ public abstract class BodySegment extends Entity  {
      * @param amount
      * @return remaining amount of food
      */
-    public abstract int saturate(int amount);
-    
+    public final int saturate(int amount) {
+            int digestableAmount = maxSaturation - saturation;
+        int digestedAmount = Math.min(amount, digestableAmount);
+        saturation += digestedAmount;
+        return amount - digestableAmount;
+    }
     
 
 
