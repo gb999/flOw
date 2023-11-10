@@ -2,6 +2,7 @@ package flow;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -11,15 +12,18 @@ import flow.entities.bodysegments.Mouth;
 import flow.entities.hostile.ChainCreature;
 import flow.entities.hostile.HostileCreature;
 import flow.entities.peaceful.PeacefulCell;
-import util.Ring;
 import util.Vec2;
 
 public class Level {
     protected Color color;    
-    public ArrayList<PeacefulCell> edibleCells;
-    public ArrayList<HostileCreature> hostileCreatures;
+    protected List<PeacefulCell> edibleCells;
+    protected List<HostileCreature> hostileCreatures;
     public Player player;
-    private Stack<PeacefulCell> spawnPeacefulStack; // Contents odf stack will be spawned on nexct iteration of update loop
+    
+    /**
+     * Contents of stack will be spawned on nexct iteration of update loop
+     */ 
+    private Stack<PeacefulCell> spawnPeacefulStack; 
 
     /**
      * Adds peaceful cell to spawn stack
@@ -65,7 +69,6 @@ public class Level {
 
                 if(!player.isAlive()) {
                     player.die();
-                    System.out.println("PLAYER DIED CHANGE LEVEL");
                     Game.changeLevel(false);
                     break;
                 }

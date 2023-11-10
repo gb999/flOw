@@ -1,7 +1,18 @@
 package flow;
+import java.beans.XMLDecoder;
+import java.io.File;
+import java.io.IOException;
+import java.security.cert.X509CRLSelector;
+import java.util.zip.CRC32;
+
 import javax.swing.JFrame;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.XMLReader;
 
 import util.Vec2;
+import util.XMLHandler;
 
 public class Game implements Runnable {
     private GameCanvas canvas;
@@ -34,7 +45,19 @@ public class Game implements Runnable {
         window.setVisible(true);
     }
 
+    private void loadLevels() throws Exception {
+        File file = new File("resources/levels.xml");
+        XMLHandler handler = new XMLHandler();
+        SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+        parser.parse(file, handler);
+    }
+
     public Game() {
+        try {
+            loadLevels();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initUI();
         currentLevel = new Level();
         nextLevel = new Level();
@@ -80,4 +103,7 @@ public class Game implements Runnable {
             }
         }
     }
+
+
+
 }
