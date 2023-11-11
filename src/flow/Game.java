@@ -1,8 +1,10 @@
 package flow;
+import java.awt.Color;
 import java.beans.XMLDecoder;
 import java.io.File;
 import java.io.IOException;
 import java.security.cert.X509CRLSelector;
+import java.util.List;
 import java.util.zip.CRC32;
 
 import javax.swing.JFrame;
@@ -19,15 +21,14 @@ public class Game implements Runnable {
     private JFrame window;
     public static Level currentLevel;
     protected static Level nextLevel;
-    private Level levels[];
+    private static List<Level> levels;
     private static Player player;
 
     public static void changeLevel(boolean next) {
         currentLevel = nextLevel;
         currentLevel.player = player;
 
-        nextLevel = new Level(); //load next
-
+        nextLevel = new Level(new Color(0)); //load next
     }
 
     private double FPS = 30;
@@ -44,23 +45,17 @@ public class Game implements Runnable {
         window.add(canvas);
         window.setVisible(true);
     }
-
-    private void loadLevels() throws Exception {
-        File file = new File("resources/levels.xml");
-        XMLHandler handler = new XMLHandler();
-        SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-        parser.parse(file, handler);
+    public void addLevel(Level level) {
+        levels.add(level);
+    }
+    public List<Level> getLevels() {
+        return levels;
     }
 
     public Game() {
-        try {
-            loadLevels();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         initUI();
-        currentLevel = new Level();
-        nextLevel = new Level();
+        currentLevel = new Level(new Color(0));
+        nextLevel = new Level(new Color(0));
         player = new Player(new Vec2(this.window.getWidth()/2, this.window.getHeight()/2));
         currentLevel.player = player;
         gameThread = new Thread(this);

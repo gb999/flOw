@@ -34,9 +34,9 @@ public class Level {
             spawnPeacefulStack.add(p);
     }
 
-    public Level() {
+    public Level(Color color) {
         spawnPeacefulStack = new Stack<>();
-        this.color = new Color(100, 100, 255);
+        this.color = color;//new Color(100, 100, 255);
         edibleCells = new ArrayList<>();
         hostileCreatures = new ArrayList<>();
         
