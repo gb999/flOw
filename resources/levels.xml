@@ -1,9 +1,9 @@
 <Game>
-    <Level color = "#00ff00"> 
+    <Level color = "#ff00ff"> 
         <SpawnPeacefulCells count = ""/> 
         <SpawnHostileCreature type = "" length = "" vitalSegments = "" speed = "" />
     </Level>
-    <Level color = "ff00ff">  
+    <Level color = "#ff00ff">  
         <SpawnPeacefulCells count = "" foodValue = ""/> 
         <SpawnHostileCreature type = "HostileCreature" speed = "" agressive = "true" view-distance = "" attack-distance = "" rest-time = "" />
     </Level>

@@ -34,7 +34,8 @@ public class XMLHandler extends DefaultHandler {
                 game = new Game();
                 break;
             case LEVEL:
-                level = new Level(Color.decode(attributes.getValue("color")));
+                String colorHex = attributes.getValue("color"); 
+                level = new Level(Color.decode(colorHex));
                 game.addLevel(level);
                 break;
             case SPAWNPEACEFULCELLS:

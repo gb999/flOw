@@ -4,6 +4,7 @@ import java.beans.XMLDecoder;
 import java.io.File;
 import java.io.IOException;
 import java.security.cert.X509CRLSelector;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.CRC32;
 
@@ -54,6 +55,7 @@ public class Game implements Runnable {
 
     public Game() {
         initUI();
+        levels = new ArrayList<>();
         currentLevel = new Level(new Color(0));
         nextLevel = new Level(new Color(0));
         player = new Player(new Vec2(this.window.getWidth()/2, this.window.getHeight()/2));
