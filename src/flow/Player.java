@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import flow.entities.bodysegments.BodySegment;
-import flow.entities.bodysegments.VitalSegment;
 import flow.entities.hostile.ChainCreature;
 import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
@@ -29,6 +28,7 @@ public class Player extends ChainCreature implements MouseListener {
         vel.normalize();
         int mult = mouseDown ? 6 : 3;
         vel.mult(mult);
+        System.out.println(pos.x + ", " + pos.y);
     }
 
     @Override
@@ -62,5 +62,8 @@ public class Player extends ChainCreature implements MouseListener {
             b.desaturate();
         }
         eat(new PeacefulCell(pos, 1)); 
+        
     }
+
+
 }

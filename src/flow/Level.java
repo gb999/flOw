@@ -34,21 +34,30 @@ public class Level {
             spawnPeacefulStack.add(p);
     }
 
+    public void spawnPeacefulCells(int count, int foodValue) {
+        for(int i = 0; i < count;i++) {
+            double rx = Math.random() * 1000;  
+            double ry = Math.random() * 1000;  
+            addEdible(new PeacefulCell(new Vec2(rx,ry), foodValue));
+
+        }
+    }
+
     public Level(Color color) {
         spawnPeacefulStack = new Stack<>();
         this.color = color;//new Color(100, 100, 255);
         edibleCells = new ArrayList<>();
         hostileCreatures = new ArrayList<>();
         
-        hostileCreatures.add(new ChainCreature(new Vec2(270, 500)));
-        hostileCreatures.get(0).applyForce(new Vec2(0.1,0));
-        edibleCells.add(new PeacefulCell(new Vec2(500, 500), 1));
-        edibleCells.add(new PeacefulCell(new Vec2(600, 500), 1));
-        edibleCells.add(new PeacefulCell(new Vec2(700, 500), 1));
-        edibleCells.add(new PeacefulCell(new Vec2(800, 500), 1));
-        edibleCells.add(new PeacefulCell(new Vec2(900, 500), 1));
-        edibleCells.add(new PeacefulCell(new Vec2(1000, 500), 1));
-        edibleCells.add(new PeacefulCell(new Vec2(1100, 500), 1));
+        // hostileCreatures.add(new ChainCreature(new Vec2(270, 500)));
+        // hostileCreatures.get(0).applyForce(new Vec2(0.1,0));
+        // edibleCells.add(new PeacefulCell(new Vec2(500, 500), 1));
+        // edibleCells.add(new PeacefulCell(new Vec2(600, 500), 1));
+        // edibleCells.add(new PeacefulCell(new Vec2(700, 500), 1));
+        // edibleCells.add(new PeacefulCell(new Vec2(800, 500), 1));
+        // edibleCells.add(new PeacefulCell(new Vec2(900, 500), 1));
+        // edibleCells.add(new PeacefulCell(new Vec2(1000, 500), 1));
+        // edibleCells.add(new PeacefulCell(new Vec2(1100, 500), 1));
     }
     public void update() {
         while(!spawnPeacefulStack.isEmpty()) {

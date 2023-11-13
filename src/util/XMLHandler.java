@@ -39,7 +39,9 @@ public class XMLHandler extends DefaultHandler {
                 game.addLevel(level);
                 break;
             case SPAWNPEACEFULCELLS:
-                // level.spawnPeacefulCells();
+                int count = Integer.parseInt(attributes.getValue("count"));
+                int foodValue = Integer.parseInt(attributes.getValue("foodValue"));
+                level.spawnPeacefulCells(count, foodValue);
                 break;
             case SPAWNHOSTILECREATURE:
                 // level.spawnPeacefulCells();

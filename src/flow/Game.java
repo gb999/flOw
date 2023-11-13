@@ -1,21 +1,12 @@
 package flow;
 import java.awt.Color;
-import java.beans.XMLDecoder;
-import java.io.File;
-import java.io.IOException;
-import java.security.cert.X509CRLSelector;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.CRC32;
 
 import javax.swing.JFrame;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.XMLReader;
 
 import util.Vec2;
-import util.XMLHandler;
 
 public class Game implements Runnable {
     private GameCanvas canvas;
@@ -56,14 +47,18 @@ public class Game implements Runnable {
     public Game() {
         initUI();
         levels = new ArrayList<>();
-        currentLevel = new Level(new Color(0));
-        nextLevel = new Level(new Color(0));
-        player = new Player(new Vec2(this.window.getWidth()/2, this.window.getHeight()/2));
-        currentLevel.player = player;
+        // currentLevel = new Level(new Color(0));
+        // nextLevel = new Level(new Color(0));
+        player = new Player(new Vec2(0,0));
         gameThread = new Thread(this);
+        
     }
-
+    
     public void start() {
+        currentLevel = levels.get(0);
+        nextLevel = levels.get(1);
+        currentLevel.player = player;
+
         gameThread.start();
     }
 
