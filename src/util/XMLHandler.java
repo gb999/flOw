@@ -12,6 +12,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import flow.Game;
 import flow.Level;
+import flow.entities.hostile.ChainCreature;
 
 public class XMLHandler extends DefaultHandler {
     private static final String GAME = "Game";
@@ -44,7 +45,15 @@ public class XMLHandler extends DefaultHandler {
                 level.spawnPeacefulCells(count, foodValue);
                 break;
             case SPAWNHOSTILECREATURE:
-                // level.spawnPeacefulCells();
+                String creatureType = attributes.getValue("type");
+                switch (creatureType) {
+                    case "ChainCreature":
+                        level.addHostileCreature(new ChainCreature(Vec2.getRandomVec2InRadius(1000)));
+                        
+                        break;
+                    default:
+                        throw new Error("No such creature as " + creatureType );
+                }
                 break;
 
             default:

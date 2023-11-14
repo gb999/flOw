@@ -21,7 +21,7 @@ public class Level {
     public Player player;
     
     /**
-     * Contents of stack will be spawned on nexct iteration of update loop
+     * Contents of stack will be spawned on next iteration of update loop
      */ 
     private Stack<PeacefulCell> spawnPeacefulStack; 
 
@@ -36,11 +36,19 @@ public class Level {
 
     public void spawnPeacefulCells(int count, int foodValue) {
         for(int i = 0; i < count;i++) {
-            double rx = Math.random() * 1000;  
-            double ry = Math.random() * 1000;  
+            double rx = Math.random() * 10000 - 5000;  
+            double ry = Math.random() * 10000 - 5000;  
             addEdible(new PeacefulCell(new Vec2(rx,ry), foodValue));
 
         }
+    }
+
+    /**
+     * Adds hostile creature to the list of hostile creatures. 
+     * @param creature
+     */
+    public void addHostileCreature(HostileCreature creature) {
+        hostileCreatures.add(creature);
     }
 
     public Level(Color color) {
@@ -106,7 +114,7 @@ public class Level {
             // Check if player eats cell 
             if(Entity.intersects(playerMouth, cell)) {
                 it.remove();
-                player.eat(cell);            
+                addEdible(player.eat(cell));            
                 continue; // Food can only ne eaten once
             }
             
@@ -114,7 +122,7 @@ public class Level {
             for(HostileCreature creature: hostileCreatures) {
                 if(Entity.intersects(creature.getMouth(), cell)) {
                     it.remove();
-                    creature.eat(cell);
+                    addEdible(creature.eat(cell));
                     break; // Food can only ne eaten once 
                 }
             }

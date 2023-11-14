@@ -62,5 +62,15 @@ public class Vec2 {
     public int getAngleDegrees() {
         return (int) (getAngle() * 180 / Math.PI);
     }
+
+    /**
+     * 
+     * @return a new vector in the specified radius around (0,0)
+     */
+    static Vec2 getRandomVec2InRadius(double radius) {
+        double r1 = Math.random(); 
+        double r2 = Math.random(); 
+        return new Vec2(r1 * radius * Math.cos(r2), r1 * radius * Math.sin(r2));
+    }
     
 }

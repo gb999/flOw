@@ -91,6 +91,7 @@ public class ChainCreature extends HostileCreature {
         }
 
     }
+
     @Override
     public void draw(Graphics2D g2) {
         for(BodySegment b: body) {

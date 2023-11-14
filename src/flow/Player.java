@@ -23,12 +23,11 @@ public class Player extends ChainCreature implements MouseListener {
         Point mousePos =  MouseInfo.getPointerInfo().getLocation();
         Point canvasPos = GameCanvas.canvas.getLocationOnScreen();
         // Velocity direction = cursor location - canvas center  
-        vel.set(mousePos.x - canvasPos.x - GameCanvas.canvas.getWidth()/2, mousePos.y - canvasPos.y - GameCanvas.canvas.getHeight()/2);
+        vel.set(mousePos.x - canvasPos.x - GameCanvas.canvas.getWidth() / 2, mousePos.y - canvasPos.y - GameCanvas.canvas.getHeight() / 2);
         
         vel.normalize();
         int mult = mouseDown ? 6 : 3;
         vel.mult(mult);
-        System.out.println(pos.x + ", " + pos.y);
     }
 
     @Override
