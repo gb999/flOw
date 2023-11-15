@@ -9,9 +9,10 @@ import java.util.Stack;
 import flow.entities.Edible;
 import flow.entities.Entity;
 import flow.entities.bodysegments.Mouth;
-import flow.entities.hostile.ChainCreature;
 import flow.entities.hostile.HostileCreature;
+import flow.entities.peaceful.BlueCell;
 import flow.entities.peaceful.PeacefulCell;
+import flow.entities.peaceful.RedCell;
 import util.Vec2;
 
 public class Level {
@@ -19,6 +20,7 @@ public class Level {
     protected List<PeacefulCell> edibleCells;
     protected List<HostileCreature> hostileCreatures;
     public Player player;
+    
     
     /**
      * Contents of stack will be spawned on next iteration of update loop
@@ -34,12 +36,24 @@ public class Level {
             spawnPeacefulStack.add(p);
     }
 
+    private RedCell redCell;
+    public void setRedCell(RedCell cell) {
+        this.redCell = cell;
+    }
+    
+    private BlueCell blueCell;
+    public void setBlueCell(BlueCell cell) {
+        this.blueCell = cell;
+    }
+    
+    /**
+     * Spawn count peaceful cells with foodValue randomly spread around (0,0) in 2000 radius; 
+     * @param count
+     * @param foodValue
+     */
     public void spawnPeacefulCells(int count, int foodValue) {
         for(int i = 0; i < count;i++) {
-            double rx = Math.random() * 10000 - 5000;  
-            double ry = Math.random() * 10000 - 5000;  
-            addEdible(new PeacefulCell(new Vec2(rx,ry), foodValue));
-
+            addEdible(new PeacefulCell(Vec2.getRandomVec2InRadius(2000), foodValue));
         }
     }
 
@@ -51,26 +65,21 @@ public class Level {
         hostileCreatures.add(creature);
     }
 
-    public Level(Color color) {
+    public Level() {
         spawnPeacefulStack = new Stack<>();
-        this.color = color;//new Color(100, 100, 255);
+        this.color = new Color(100, 100, 255);
         edibleCells = new ArrayList<>();
         hostileCreatures = new ArrayList<>();
-        
+
         // hostileCreatures.add(new ChainCreature(new Vec2(270, 500)));
         // hostileCreatures.get(0).applyForce(new Vec2(0.1,0));
-        // edibleCells.add(new PeacefulCell(new Vec2(500, 500), 1));
-        // edibleCells.add(new PeacefulCell(new Vec2(600, 500), 1));
-        // edibleCells.add(new PeacefulCell(new Vec2(700, 500), 1));
-        // edibleCells.add(new PeacefulCell(new Vec2(800, 500), 1));
-        // edibleCells.add(new PeacefulCell(new Vec2(900, 500), 1));
-        // edibleCells.add(new PeacefulCell(new Vec2(1000, 500), 1));
-        // edibleCells.add(new PeacefulCell(new Vec2(1100, 500), 1));
     }
-    public void update() {
-        while(!spawnPeacefulStack.isEmpty()) {
-            edibleCells.add(spawnPeacefulStack.pop());
-        }
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+
+    private void updateHostileCreatures() {
         // Check collisions between player and hostile creatures
         Mouth playerMouth = player.getMouth();  
         // Using iterator to avoid concurrent modifications.
@@ -104,6 +113,21 @@ public class Level {
                 break;
             }
         }
+    }
+
+    private void updatePeacefulCells() {
+        Mouth playerMouth = player.getMouth();  
+        
+        // Check collisions between player and blue/red cells 
+        if(redCell != null && Entity.intersects(playerMouth, redCell)) {
+            redCell.update();
+            redCell.isEatenBy(player);
+        }
+        if(blueCell != null && Entity.intersects(playerMouth, blueCell)) {
+            blueCell.update();
+            blueCell.isEatenBy(player);
+        }
+               
 
         // Check collisions between hostile and peaceful cells
         // Using an iterator makes it safe to remove elements while iterating   
@@ -117,7 +141,7 @@ public class Level {
                 addEdible(player.eat(cell));            
                 continue; // Food can only ne eaten once
             }
-            
+
             // Check if hostile creature eats cell 
             for(HostileCreature creature: hostileCreatures) {
                 if(Entity.intersects(creature.getMouth(), cell)) {
@@ -127,12 +151,25 @@ public class Level {
                 }
             }
         }
+    }
+
+    public void update() {
+        // Spawn peaceful cells if needed.
+        while(!spawnPeacefulStack.isEmpty()) {
+            edibleCells.add(spawnPeacefulStack.pop());
+        }
+
+        updateHostileCreatures();
+        
+        updatePeacefulCells();
+
 
     }
 
 
     public void drawEntities(Graphics2D g2) {
-
+        if(redCell != null) redCell.draw(g2);
+        if(blueCell != null) blueCell.draw(g2);
         for(Entity e: edibleCells) {
             e.draw(g2);
         }

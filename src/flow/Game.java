@@ -5,26 +5,45 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-
+import flow.entities.peaceful.BlueCell;
+import flow.entities.peaceful.RedCell;
+import util.LevelLoader;
 import util.Vec2;
 
 public class Game implements Runnable {
     private GameCanvas canvas;
     private JFrame window;
+    private static int currentLevelIndex;
     public static Level currentLevel;
     protected static Level nextLevel;
-    private static List<Level> levels;
+    private static List<LevelLoader> levelLoaders;
+    
     private static Player player;
-
-    public static void changeLevel(boolean next) {
-        currentLevel = nextLevel;
-        currentLevel.player = player;
-
-        nextLevel = new Level(new Color(0)); //load next
-    }
 
     private double FPS = 30;
     private Thread gameThread;
+
+
+    /**
+     * Change level to next if next is true,
+     * Change level to previous level if next is false.
+     * @param next
+     */
+    public static void changeLevel(boolean next) {
+        if(next) {
+            currentLevelIndex += 1; 
+            currentLevel = nextLevel;
+            if(currentLevelIndex < levelLoaders.size()- 1)
+                nextLevel = levelLoaders.get(currentLevelIndex + 1).loadLevel();
+        } else {
+            currentLevelIndex -= 1; 
+            nextLevel = currentLevel;
+            currentLevel = levelLoaders.get(currentLevelIndex).loadLevel();
+        }        
+        currentLevel.player = player;
+    }
+
+
 
     private void initUI() {
         window = new JFrame("flOw");
@@ -37,28 +56,19 @@ public class Game implements Runnable {
         window.add(canvas);
         window.setVisible(true);
     }
-    public void addLevel(Level level) {
-        levels.add(level);
-    }
-    public List<Level> getLevels() {
-        return levels;
-    }
 
     public Game() {
         initUI();
-        levels = new ArrayList<>();
-        // currentLevel = new Level(new Color(0));
-        // nextLevel = new Level(new Color(0));
+        currentLevelIndex = 0;
+        levelLoaders = new ArrayList<>();
         player = new Player(new Vec2(0,0));
         gameThread = new Thread(this);
-        
     }
     
     public void start() {
-        currentLevel = levels.get(0);
-        nextLevel = levels.get(1);
+        currentLevel = levelLoaders.get(0).loadLevel();
+        nextLevel = levelLoaders.get(1).loadLevel();
         currentLevel.player = player;
-
         gameThread.start();
     }
 
@@ -85,7 +95,7 @@ public class Game implements Runnable {
         long currentTime;
         while (gameThread != null) {
             currentTime = System.nanoTime();
-            dt += (currentTime-lastTime) / drawInterval;
+            dt += (currentTime - lastTime) / drawInterval;
             lastTime = currentTime;
 
             if(dt >= 1) {
@@ -98,4 +108,7 @@ public class Game implements Runnable {
 
 
 
+    public void setLevelLoaders(ArrayList<LevelLoader> levelLoaders) {
+        this.levelLoaders = levelLoaders; 
+    }
 }
