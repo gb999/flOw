@@ -44,8 +44,6 @@ public abstract class ChangeLevelCell extends PeacefulCell{
             double signalProgress = (double)(System.currentTimeMillis() - lastSignalStart) / (double)signalLength ;
             signalProgress %= 1;
             // location of signal   
-            double sx = (px) / (pos.x);
-            double sy = (py) / (pos.y);
 
             // Angle of player and cell
             double m = (py - cy) / (px - cx);
@@ -68,7 +66,8 @@ public abstract class ChangeLevelCell extends PeacefulCell{
             // x = (- h/2) / (y2 - py) * (x2 - px) + px
 
             // intersection(ix, iy)
-            double ix, iy; 
+            double ix = 0; 
+            double iy = 0; 
 
             // If cell is not on screen, animate
             if(!(px - w/2 < cx 
@@ -76,32 +75,41 @@ public abstract class ChangeLevelCell extends PeacefulCell{
             && py - h/2 < cy
             && py + h/2 > cy)) {
                 // cell is on left of player
-                if(cx <= px - w/2) {
-                    ix = m * (px - w/2 - cx) + cy;
+                if(cx <= px) {
+                    double Iy = m * (px - w/2 - cx) + cy;
+                    if(py - h/2 <= Iy && Iy <= py+ h/2) {
+                        ix = px - w/2;
+                        iy = Iy;
+                    }
                 }
                 // cell is on right of player
-                if(cx >= px + w/2) {
+                if(cx >= px) {
+                    double Iy = m * (px + w/2 - cx) + cy;
+                    if(py - h/2 <= Iy && Iy <= py+ h/2) {
+                        ix = px + w/2;
+                        iy = Iy;
+                    }
 
                 }
                 // cell is above player
-                if(cy <= py - h/2) {
-
+                if(cy <= py) {
+                    double Ix = (py - h / 2 - cy)/m + cx;
+                    if(px - w/2 <= Ix && Ix <= px + w/2) {
+                        ix = Ix;
+                        iy = py - h/2;
+                    } 
                 }
                 // cell is below player
-                if(cy >= py + h/2) {
-
+                if(cy >= py) {
+                    double Ix = (py + h / 2 - cy)/m + cx;
+                    if(px - w/2 <= Ix && Ix <= px + w/2) {
+                        ix = Ix;
+                        iy = py + h/2;
+                    } 
                 }
-
-
-
+                g2.drawArc((int)ix - (int)(100* signalProgress), (int)iy - (int)(100* signalProgress), (int)(signalProgress * 200), (int)(signalProgress * 200), 0, 360);
             }
-            
 
-
-             
-
-
-            g2.drawArc((int)sx, (int)sy, (int)(signalProgress * 200), (int)(signalProgress * 200), 0, 360);
         }
 
         g2.setColor(color);
