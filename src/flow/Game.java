@@ -1,24 +1,21 @@
 package flow;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
 
-import flow.entities.peaceful.BlueCell;
-import flow.entities.peaceful.RedCell;
 import util.LevelLoader;
 import util.Vec2;
 
 public class Game implements Runnable {
-    private GameCanvas canvas;
+    public static GameCanvas canvas;
     private JFrame window;
     private static int currentLevelIndex;
     public static Level currentLevel;
     protected static Level nextLevel;
     private static List<LevelLoader> levelLoaders;
     
-    private static Player player;
+    public static Player player;
 
     private double FPS = 30;
     private Thread gameThread;

@@ -1,5 +1,5 @@
 <Game>
-    <Level color = "#0000ff"> 
+    <Level color = "#00000f"> 
         <!-- <SpawnPeacefulCells count = "100" foodValue = "2"/>  -->
         <SpawnHostileCreature type = "ChainCreature" length = "" vitalSegments = "" speed = "" /> 
     </Level>

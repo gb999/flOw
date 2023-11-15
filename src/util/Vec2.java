@@ -49,6 +49,7 @@ public class Vec2 {
     public double distanceFrom(Vec2 v) {
         return Math.sqrt((x-v.x)*(x-v.x) + (y-v.y)*(y-v.y));
     }
+    
 
     public void normalize() {
         double l = getLength();

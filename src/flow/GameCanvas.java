@@ -13,6 +13,7 @@ public class GameCanvas extends JPanel {
     GameCanvas() {
         canvas = this;
     }
+    
 
     public void paint(Graphics g) {
         Player player = Game.currentLevel.player;

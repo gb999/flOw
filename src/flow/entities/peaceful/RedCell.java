@@ -7,9 +7,9 @@ import util.Vec2;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class RedCell extends PeacefulCell {
+public class RedCell extends ChangeLevelCell {
     public RedCell(Vec2 pos) {
-        super(pos, 0);
+        super(pos, new Color(255, 0 ,0));
     }   
 
     @Override
@@ -17,12 +17,5 @@ public class RedCell extends PeacefulCell {
         Game.changeLevel(true);
     }
 
-    @Override
-    public void draw(Graphics2D g2) {
-        Color color = g2.getColor();
-        g2.setColor(new Color(255,0,0));
-        super.draw(g2);
-        g2.setColor(color);
 
-    }
 }
