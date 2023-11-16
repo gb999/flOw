@@ -30,11 +30,11 @@ public class Game implements Runnable {
         if(next) {
             currentLevelIndex += 1; 
             currentLevel = nextLevel;
-            if(currentLevelIndex < levelLoaders.size()- 1)
+            if(currentLevelIndex < levelLoaders.size() - 1)
                 nextLevel = levelLoaders.get(currentLevelIndex + 1).loadLevel();
         } else {
+            nextLevel = levelLoaders.get(currentLevelIndex).loadLevel();
             currentLevelIndex -= 1; 
-            nextLevel = currentLevel;
             currentLevel = levelLoaders.get(currentLevelIndex).loadLevel();
         }        
         currentLevel.player = player;

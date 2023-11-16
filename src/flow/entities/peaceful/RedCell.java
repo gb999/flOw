@@ -5,7 +5,6 @@ import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 
 public class RedCell extends ChangeLevelCell {
     public RedCell(Vec2 pos) {
@@ -16,6 +15,4 @@ public class RedCell extends ChangeLevelCell {
     public void isEatenBy(HostileCreature creature) {
         Game.changeLevel(true);
     }
-
-
 }

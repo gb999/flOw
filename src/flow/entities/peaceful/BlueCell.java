@@ -14,6 +14,6 @@ public class BlueCell extends ChangeLevelCell{
     }
     @Override
     public void isEatenBy(HostileCreature creature) {
-        Game.changeLevel(true);
+        Game.changeLevel(false);
     }
 }

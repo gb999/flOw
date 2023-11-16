@@ -122,10 +122,12 @@ public class Level {
         if(redCell != null && Entity.intersects(playerMouth, redCell)) {
             redCell.update();
             redCell.isEatenBy(player);
+            redCell = null;
         }
         if(blueCell != null && Entity.intersects(playerMouth, blueCell)) {
             blueCell.update();
             blueCell.isEatenBy(player);
+            blueCell = null;
         }
                
 
@@ -166,10 +168,17 @@ public class Level {
 
     }
 
-
-    public void drawEntities(Graphics2D g2) {
-        if(redCell != null) redCell.draw(g2);
-        if(blueCell != null) blueCell.draw(g2);
+    /**
+     * 
+     * @param g2
+     * @param current is true if this is the current level
+     */
+    public void drawEntities(Graphics2D g2, boolean current) {
+        if (current) {
+            if(redCell != null) redCell.draw(g2);
+            if(blueCell != null) blueCell.draw(g2);
+            player.draw(g2);
+        }
         for(Entity e: edibleCells) {
             e.draw(g2);
         }

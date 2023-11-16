@@ -10,8 +10,8 @@ import util.Vec2;
 
 public abstract class ChangeLevelCell extends PeacefulCell{
     private long lastTime;
-    private long signalInterval = 5000;
-    private long signalLength = 3000;
+    private long signalInterval = 3000;
+    private long signalLength = 1500;
     private long lastSignalStart;
     private boolean signal;
     protected Color cellColor;
@@ -42,7 +42,9 @@ public abstract class ChangeLevelCell extends PeacefulCell{
 
         if(signal) {
             double signalProgress = (double)(System.currentTimeMillis() - lastSignalStart) / (double)signalLength ;
+            signalProgress *= 3;
             signalProgress %= 1;
+
             // location of signal   
 
             // Angle of player and cell
@@ -124,9 +126,9 @@ public abstract class ChangeLevelCell extends PeacefulCell{
 
         }
 
-        // if(signal && currentTime - lastSignalStart > signalLength) {
-        //     signal = false;
-        // }
+        if(signal && currentTime - lastSignalStart > signalLength) {
+            signal = false;
+        }
         lastTime = currentTime;
     }
 }

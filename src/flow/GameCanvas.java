@@ -16,7 +16,7 @@ public class GameCanvas extends JPanel {
     
 
     public void paint(Graphics g) {
-        Player player = Game.currentLevel.player;
+        Player player = Game.player;
         Vec2 cameraPos = new Vec2(player.pos.x - getWidth() / 2, player.pos.y - getHeight() / 2);
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -27,13 +27,13 @@ public class GameCanvas extends JPanel {
         
         g2.translate(-cameraPos.x, -cameraPos.y);
         g2.setColor(Color.WHITE);
-        player.draw(g2);
-        Game.currentLevel.drawEntities(g2);
+        // player.draw(g2);
+        Game.currentLevel.drawEntities(g2, true);
 
         if(Game.nextLevel != null) {
 
-            g2.setColor(new Color(255,255,255,100));
-            Game.nextLevel.drawEntities(g2);
+            g2.setColor(new Color(255,255,255,200));
+            Game.nextLevel.drawEntities(g2, false);
         }
 
         g2.dispose();
