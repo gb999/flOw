@@ -86,7 +86,9 @@ public abstract class HostileCreature extends Entity {
     }
     @Override 
     public void update() {
+        super.update();
         if (attackCooldown > 0 ) 
-            attackCooldown -=1 ;
+            attackCooldown -= 1;
+        vel.mult(attackCooldown / restTime + 1);
     }
 }

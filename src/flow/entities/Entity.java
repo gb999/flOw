@@ -9,6 +9,7 @@ public abstract class Entity implements IEntity {
     public Vec2 pos;
     public Vec2 vel;
     protected Vec2 acc;
+    protected double maxSpeed;
     
     public Vec2 getPos() {
         return pos;
@@ -24,6 +25,8 @@ public abstract class Entity implements IEntity {
         this.pos = new Vec2(pos);
         vel = new Vec2();
         acc = new Vec2();
+        maxSpeed = 5;
+
     }
 
     public void update() {
@@ -35,9 +38,10 @@ public abstract class Entity implements IEntity {
         acc.mult(0.7);
         
         // Limit  speed
-        if(vel.getLength() > 10) {
-            vel.normalize();
-            vel.mult(30);
+        if(vel.getLength() > maxSpeed) {
+            //vel.normalize();
+            vel.mult(0.7);
+            // vel.mult(30);
         }
         
         

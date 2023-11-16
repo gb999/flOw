@@ -111,7 +111,6 @@ public class ChainCreature extends HostileCreature {
     private void attack() {
         applyForce(vel);
         vel.mult(1.2);
-        System.out.println("astatas");
         
     }
     private void followTarget() {
@@ -152,7 +151,7 @@ public class ChainCreature extends HostileCreature {
     public void update() {
         super.update();
 
-        //updateBehaviour();
+        updateBehaviour();
         
         updateBody();
     }
