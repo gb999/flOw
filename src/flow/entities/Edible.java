@@ -3,7 +3,7 @@ package flow.entities;
 
 import flow.entities.hostile.HostileCreature;
 
-public interface Edible {
+public interface Edible extends IEntity {
     
     /**
      * @return food value of segment.

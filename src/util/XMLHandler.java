@@ -53,8 +53,13 @@ public class XMLHandler extends DefaultHandler {
                 String creatureType = attributes.getValue("type");
                 switch (creatureType) {
                     case "ChainCreature":
-                        ChainCreature creature = new ChainCreature(Vec2.getRandomVec2InRadius(1000));
+                        Vec2 randomPos = Vec2.getRandomVec2InRadius(1000);
+                        int length = Integer.parseInt(attributes.getValue("length"));
+                        int nVitalSegments = Integer.parseInt(attributes.getValue("vitalSegments"));
+                        ChainCreature creature = new ChainCreature(randomPos, length, nVitalSegments);
                         levelLoader.addCommand(level->level.addHostileCreature(creature));
+                        boolean agressive = attributes.getValue("agressive") == null ? false : true;
+                        creature.setAgressive(true);
                         break;
                     default:
                         throw new Error("No such creature as " + creatureType );

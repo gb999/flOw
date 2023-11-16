@@ -86,6 +86,10 @@ public class Level {
         for(Iterator<HostileCreature> it = hostileCreatures.iterator(); it.hasNext(); ) {
             HostileCreature creature = it.next();
             creature.update();
+            if(creature.getPos().distanceFrom(player.pos) < creature.getViewDistance()) {
+                creature.setClosestEdible(player.getFirstEdibleSegment());
+                
+            }
 
             // Check if player's body is eaten.
             Mouth hostileMouth = creature.getMouth();

@@ -5,11 +5,14 @@ import java.awt.Rectangle;
 
 import util.Vec2;
 
-public abstract class Entity {
+public abstract class Entity implements IEntity {
     public Vec2 pos;
     public Vec2 vel;
     protected Vec2 acc;
     
+    public Vec2 getPos() {
+        return pos;
+    }
     /**
      * Radius of the entity. 
      * Most entities are represented with a circle.

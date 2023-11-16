@@ -19,13 +19,16 @@ import util.Vec2;
 public class ChainCreature extends HostileCreature {
     protected LinkedList<BodySegment> body;
     Mouth mouth;
-    public ChainCreature(Vec2 pos) {
+    public ChainCreature(Vec2 pos, int length, int nVitalSegments) {
         super(pos);
         body = new LinkedList<>();
         mouth = new Mouth(this, pos);
         body.add(mouth);
-        body.add(new VitalSegment(new Vec2(pos.x, pos.y), true));
-        for(int i = 0; i < 8; i++) {
+        int i = 0;
+        for(; i < nVitalSegments; i++) {
+            body.add(new VitalSegment(new Vec2(pos.x, pos.y + i * 20), true));
+        }
+        for(; i < length; i++) {
             BodySegment s = new SimpleSegment(new Vec2(pos.x, pos.y + i * 20));
             body.add(s);
         }
@@ -62,10 +65,7 @@ public class ChainCreature extends HostileCreature {
         return null;
     }
 
-    @Override
-    public void update() {
-        super.update();
-
+    private void updateBody() {
         // the Mouth pulls the whole body
         mouth.vel = this.vel;
         this.pos = mouth.pos;
@@ -91,6 +91,71 @@ public class ChainCreature extends HostileCreature {
         }
 
     }
+    private boolean edibleInDistance(Edible edible, double distance) {
+        return pos.distanceFrom(edible.getPos()) <= distance;
+    }
+    private boolean closestEdibleInAttackDistance() {
+        return edibleInDistance(closestEdible, attackDistance);
+    }
+    private boolean  targetInAttackDistance() {
+        return edibleInDistance(target, attackDistance);
+        
+    }
+    private boolean closestEdibleInViewDistance() {
+        return edibleInDistance(closestEdible, viewDistance);
+    }
+    private boolean  targetInViewDistance() {
+        return edibleInDistance(target, viewDistance);
+        
+    }
+    private void attack() {
+        applyForce(vel);
+        vel.mult(1.2);
+        System.out.println("astatas");
+        
+    }
+    private void followTarget() {
+        Vec2 dir = target.getPos().clone();
+        dir.sub(pos);
+        vel.setDir(dir);
+    }
+    protected void updateBehaviour() {
+        if(agressive && attackCooldown == 0) {
+            // set target
+            if(target != null) {
+                if(!targetInViewDistance()) target = null;
+            }
+            if(target == null && closestEdible != null) {
+                if(closestEdibleInViewDistance()) target = closestEdible;
+                             
+            }  
+            
+            if(target != null) {
+                
+                if(targetInAttackDistance()) {
+                    attack();
+                    target = null;  
+                    attackCooldown = restTime;
+                    
+
+                } else {
+                    followTarget();
+                }
+            }
+            
+
+        }
+
+    } 
+
+    @Override
+    public void update() {
+        super.update();
+
+        //updateBehaviour();
+        
+        updateBody();
+    }
 
     @Override
     public void draw(Graphics2D g2) {
@@ -99,7 +164,7 @@ public class ChainCreature extends HostileCreature {
         } 
     }
 
-    private ArrayList<Edible> getEdibleSegments() {
+    protected ArrayList<Edible> getEdibleSegments() {
         ArrayList<Edible> edibleSegments = new ArrayList<>();
         for(BodySegment b : body) {
             if(b instanceof Edible)

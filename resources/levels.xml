@@ -1,9 +1,14 @@
 <Game>
     <Level color = "#00000f"> 
-        <SpawnPeacefulCells count = "1000" foodValue = "2"/> 
-        <SpawnHostileCreature type = "ChainCreature" length = "" vitalSegments = "" speed = "" /> 
+    <!-- Player should not be able to die on Level 1, sp there should be no hostile creatures-->
+        <SpawnPeacefulCells count = "100" foodValue = "2"/> 
+        <SpawnHostileCreature type = "ChainCreature" length = "5" vitalSegments = "2" speed = "2" agressive = "true" /> 
+        <SpawnHostileCreature type = "ChainCreature" length = "5" vitalSegments = "2" speed = "2" agressive = "true" /> 
+        <SpawnHostileCreature type = "ChainCreature" length = "5" vitalSegments = "2" speed = "2" agressive = "true" /> 
+        <SpawnHostileCreature type = "ChainCreature" length = "5" vitalSegments = "2" speed = "2" agressive = "true" /> 
     </Level>
     <Level color = "#78acff">  
+        <SpawnHostileCreature type = "ChainCreature" length = "5" vitalSegments = "2" speed = "0.1" /> 
         <!-- <SpawnPeacefulCells count = "100" foodValue = "1"/>  -->
         <!-- <SpawnHostileCreature type = "HostileCreature" speed = "" agressive = "true" view-distance = "" attack-distance = "" rest-time = "" /> -->
     </Level>

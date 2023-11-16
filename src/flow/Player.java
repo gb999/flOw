@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import flow.entities.Edible;
 import flow.entities.bodysegments.BodySegment;
 import flow.entities.hostile.ChainCreature;
 import flow.entities.peaceful.PeacefulCell;
@@ -13,9 +14,11 @@ import util.Vec2;
 public class Player extends ChainCreature implements MouseListener {
     boolean mouseDown = false;
     Player(Vec2 pos) {
-        super(pos);
+        super(pos, 8, 3);
         GameCanvas.canvas.addMouseListener(this);
+        agressive = false;
     }
+    @Override
     public void update() {
         super.update();
 
@@ -62,6 +65,10 @@ public class Player extends ChainCreature implements MouseListener {
         }
         eat(new PeacefulCell(pos, 1)); 
         
+    }
+
+    public Edible getFirstEdibleSegment() {
+        return getEdibleSegments().get(0);
     }
 
 

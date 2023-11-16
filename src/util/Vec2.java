@@ -63,6 +63,19 @@ public class Vec2 {
     public int getAngleDegrees() {
         return (int) (getAngle() * 180 / Math.PI);
     }
+    /**
+     * Sets direction parallel to v, doesnt change length
+     * @param v
+     */
+    public void setDir(Vec2 v) {
+        double l = getLength() / v.getLength();
+        set(v.x, v.y);
+        mult(l);
+    }
+
+    public Vec2 clone() {
+        return new Vec2(x, y);
+    }
 
     /**
      * 

@@ -11,9 +11,28 @@ import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
 
 public abstract class HostileCreature extends Entity {
+    protected boolean agressive;
+    protected int speed;
+    protected int viewDistance;
+    protected int attackDistance;
+    protected int attackCooldown;
+    protected int restTime;
+    protected Edible closestEdible;
+    protected Edible target;
+
     protected HostileCreature(Vec2 pos) {
         super(pos);
+        agressive = false;
+        viewDistance = 400;
+        attackDistance = 100;
+        speed = 1;
+        vel.set(speed, 0);
+        restTime = 5000;
+        closestEdible = null;
+        target = null;
+        attackCooldown = 0;
     }
+
     /**
      * @return Mouth of this creature
      */
@@ -52,4 +71,22 @@ public abstract class HostileCreature extends Entity {
         return new ArrayList<PeacefulCell>();
     };
 
+    public void setClosestEdible(Edible edible) {
+        closestEdible = edible;
+    }
+
+    public int getViewDistance() {
+        return viewDistance;
+    };
+    public void setViewDistance(int viewDistance) {
+        this.viewDistance = viewDistance;
+    };
+    public void setAgressive(boolean value) {
+        this.agressive = value;
+    }
+    @Override 
+    public void update() {
+        if (attackCooldown > 0 ) 
+            attackCooldown -=1 ;
+    }
 }
