@@ -66,10 +66,10 @@ public class Vec2 {
 
     /**
      * 
-     * @return a new vector in the specified radius around (0,0) with a distance at least radius/2 from (0, 0) 
+     * @return a new vector in the specified radius around (0,0) with a distance at least radius/4 from (0, 0) 
      */
     public static Vec2 getRandomVec2InRadius(double radius) {
-        double d = Math.random() + 0.5; 
+        double d = Math.random() * 0.75 + 0.25; 
         double a = Math.random() * 2 * Math.PI; 
         return new Vec2(d * radius * Math.cos(a), d * radius * Math.sin(a));
     }

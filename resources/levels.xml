@@ -3,13 +3,15 @@
         <SpawnPeacefulCells count = "1000" foodValue = "2"/> 
         <SpawnHostileCreature type = "ChainCreature" length = "" vitalSegments = "" speed = "" /> 
     </Level>
-    <Level color = "#ff00ff">  
+    <Level color = "#78acff">  
         <!-- <SpawnPeacefulCells count = "100" foodValue = "1"/>  -->
         <!-- <SpawnHostileCreature type = "HostileCreature" speed = "" agressive = "true" view-distance = "" attack-distance = "" rest-time = "" /> -->
     </Level>
-    <Level color = "#00ff00">  
+    <Level color = "#619eff">  
 
         <!-- <SpawnPeacefulCells count = "100" foodValue = "1"/>  -->
+    </Level>
+    <Level color = "#4d91ff">  
     </Level>
     
 </Game>
