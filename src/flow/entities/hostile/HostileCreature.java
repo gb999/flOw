@@ -77,6 +77,13 @@ public abstract class HostileCreature extends Entity {
         return new ArrayList<PeacefulCell>();
     };
 
+    /**
+     * Grows new vital segment
+     */
+    public abstract void growVital();
+
+
+    
     public void setClosestEdible(Edible edible) {
         closestEdible = edible;
     }

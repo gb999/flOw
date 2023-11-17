@@ -25,6 +25,7 @@ public class GameCanvas extends JPanel {
         g2.setColor(Game.currentLevel.color);
         g2.fillRect(0, 0,  getWidth(), getHeight());
         
+        
         g2.translate(-cameraPos.x, -cameraPos.y);
         g2.setColor(Color.WHITE);
         // player.draw(g2);

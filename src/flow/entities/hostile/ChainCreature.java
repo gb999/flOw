@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.function.Function;
 
 import flow.entities.Edible;
 import flow.entities.Entity;
@@ -13,6 +14,8 @@ import flow.entities.bodysegments.BodySegment;
 import flow.entities.bodysegments.Mouth;
 import flow.entities.bodysegments.SimpleSegment;
 import flow.entities.bodysegments.VitalSegment;
+import flow.entities.peaceful.BiggerMouth;
+import flow.entities.peaceful.ExtraVital;
 import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
 
@@ -116,6 +119,7 @@ public class ChainCreature extends HostileCreature {
         applyForce(vel);
         
     }
+
     private void followTarget() {
         Vec2 dir = target.getPos().clone();
         dir.sub(pos);
@@ -130,25 +134,17 @@ public class ChainCreature extends HostileCreature {
             }
             if(target == null && closestEdible != null) {
                 if(closestEdibleInViewDistance()) target = closestEdible;
-                             
             }  
-            
             if(target != null) {
-                
                 if(targetInAttackDistance()) {
                     attack();
                     target = null;  
                     attackCooldown = restTime;
-                    
-
                 } else {
                     followTarget();
                 }
             }
-            
-
         }
-
     } 
 
     @Override
@@ -163,9 +159,7 @@ public class ChainCreature extends HostileCreature {
     @Override
     public void draw(Graphics2D g2) {
         Color prevColor = g2.getColor();
-        if(attackCooldown == 0) {
-            g2.setColor(new Color(255,150,0));
-        } 
+        //g2.setColor(new Color(255,150,0, prevColor.getAlpha())); 
         for(BodySegment b: body) {
             b.draw(g2);
         } 
@@ -206,12 +200,33 @@ public class ChainCreature extends HostileCreature {
         }
         return false;
     }
-    
 
+    private static ArrayList<Function<Vec2, PeacefulCell>> dropTypes;
+    static {
+        dropTypes = new ArrayList<>();
+        dropTypes.add((pos)->new ExtraVital(pos));
+        dropTypes.add((pos)->new BiggerMouth(pos));
+    }
     /**
-     * Spawn cells on death
+     * Spawn cells on death with 0.3 chance 
+     * for each body segment 
      */
     public List<PeacefulCell> getRemains() {
-        return new ArrayList<>();
+        ArrayList<PeacefulCell> remains = new ArrayList<>();
+        body.forEach(segment -> {
+            double r = Math.random();
+            if(r > 0.7) {
+                int type = (int)Math.floor(Math.random() * dropTypes.size());
+                PeacefulCell c = dropTypes.get(type).apply(segment.getPos());
+                remains.add(c); 
+
+            }
+        });
+        return remains;
+    }
+
+    @Override
+    public void growVital() {
+        body.add(new VitalSegment(pos));
     }
 }

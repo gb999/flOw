@@ -64,7 +64,7 @@ public class XMLHandler extends DefaultHandler {
                         creature.setSpeed(speed);
                         break;
                     default:
-                        throw new Error("No such creature as " + creatureType );
+                        throw new Error("No such creature as " + creatureType);
                 }
                 break;
 

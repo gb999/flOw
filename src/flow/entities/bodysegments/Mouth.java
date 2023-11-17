@@ -28,4 +28,16 @@ public class Mouth extends BodySegment {
     public int getMaxSaturation() {
         return 0;
     }
+
+    public double getSize() {
+        return r;
+    }
+    /**
+     * Sets size to r* size
+     * @param size
+     */
+    public void setSize(double size) {
+        r *= size;
+    }
+    
 }

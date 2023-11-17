@@ -1,7 +1,6 @@
 package flow.entities.peaceful;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 
 import flow.Game;
 import flow.entities.hostile.HostileCreature;

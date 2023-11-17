@@ -1,11 +1,28 @@
 package flow.entities.peaceful;
 
+import java.awt.Font;
+import java.awt.Graphics2D;
+
+import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 public class ExtraVital extends PeacefulCell {
 
-    public ExtraVital(Vec2 pos, int foodValue) {
-        super(pos, foodValue);
+    public ExtraVital(Vec2 pos) {
+        super(pos, 1);
     }
+    @Override
+    public void isEatenBy(HostileCreature creature) {
+        creature.growVital();
+        
+    }
+    @Override 
+    public void draw(Graphics2D g2) {
+        super.draw(g2);
+        Font font = g2.getFont();
+        g2.setFont(new Font(font.getFamily(), font.getStyle(), 32));
+        g2.drawString(String.valueOf("+"), (int) (pos.x+ r/2), (int) (pos.y + 20+ r/2));
+    }
+
     
 }
