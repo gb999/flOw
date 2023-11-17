@@ -1,5 +1,6 @@
 package flow.entities.hostile;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -32,6 +33,8 @@ public class ChainCreature extends HostileCreature {
             BodySegment s = new SimpleSegment(new Vec2(pos.x, pos.y + i * 20));
             body.add(s);
         }
+
+        maxSpeed = 2 * speed;
     } 
 
     @Override
@@ -109,8 +112,9 @@ public class ChainCreature extends HostileCreature {
         
     }
     private void attack() {
+        lastAttackTime = System.currentTimeMillis();
+        vel.mult(5);
         applyForce(vel);
-        vel.mult(1.2);
         
     }
     private void followTarget() {
@@ -118,6 +122,7 @@ public class ChainCreature extends HostileCreature {
         dir.sub(pos);
         vel.setDir(dir);
     }
+
     protected void updateBehaviour() {
         if(agressive && attackCooldown == 0) {
             // set target
@@ -158,9 +163,14 @@ public class ChainCreature extends HostileCreature {
 
     @Override
     public void draw(Graphics2D g2) {
+        Color prevColor = g2.getColor();
+        if(attackCooldown == 0) {
+            g2.setColor(new Color(255,150,0));
+        } 
         for(BodySegment b: body) {
             b.draw(g2);
         } 
+        g2.setColor(prevColor);
     }
 
     protected ArrayList<Edible> getEdibleSegments() {

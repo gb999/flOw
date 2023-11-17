@@ -9,7 +9,7 @@ import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 public abstract class ChangeLevelCell extends PeacefulCell{
-    private long lastTime;
+    private long lastTime = 0;
     private long signalInterval = 3000;
     private long signalLength = 1500;
     private long lastSignalStart;

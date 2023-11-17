@@ -12,11 +12,11 @@ import util.Vec2;
 
 public abstract class HostileCreature extends Entity {
     protected boolean agressive;
-    protected int speed;
+    protected double speed;
     protected int viewDistance;
     protected int attackDistance;
-    protected int attackCooldown;
-    protected int restTime;
+    protected long attackCooldown;
+    protected long restTime;
     protected Edible closestEdible;
     protected Edible target;
 
@@ -26,11 +26,17 @@ public abstract class HostileCreature extends Entity {
         viewDistance = 400;
         attackDistance = 100;
         speed = 1;
+        maxSpeed = speed;
         vel.set(speed, 0);
         restTime = 5000;
         closestEdible = null;
         target = null;
         attackCooldown = 0;
+        lastAttackTime = 0;
+    }
+    public void setSpeed(double speed) {
+        this.speed = speed;
+        maxSpeed = 2 * speed;
     }
 
     /**
@@ -84,11 +90,15 @@ public abstract class HostileCreature extends Entity {
     public void setAgressive(boolean value) {
         this.agressive = value;
     }
+
+    long lastAttackTime;
     @Override 
     public void update() {
         super.update();
         if (attackCooldown > 0 ) 
-            attackCooldown -= 1;
-        vel.mult(attackCooldown / restTime + 1);
+            attackCooldown = Math.max(0, restTime - (System.currentTimeMillis() - lastAttackTime));
+        
+
+        //vel.mult(attackCooldown / restTime + 1);
     }
 }

@@ -59,7 +59,9 @@ public class XMLHandler extends DefaultHandler {
                         ChainCreature creature = new ChainCreature(randomPos, length, nVitalSegments);
                         levelLoader.addCommand(level->level.addHostileCreature(creature));
                         boolean agressive = attributes.getValue("agressive") == null ? false : true;
-                        creature.setAgressive(true);
+                        creature.setAgressive(agressive);
+                        double speed = Double.parseDouble(attributes.getValue("speed"));
+                        creature.setSpeed(speed);
                         break;
                     default:
                         throw new Error("No such creature as " + creatureType );
