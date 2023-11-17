@@ -17,7 +17,7 @@ public class Mouth extends BodySegment {
 
     public void draw(Graphics2D g2) {
         int dir = vel.getAngleDegrees();
-        g2.drawArc((int)pos.x-16, (int)pos.y-16, 32, 32, -dir+90, 180);   // Face in velocity's direction
+        g2.drawArc((int)(pos.x - r * 1.5), (int)(pos.y - r * 1.5), (int) (3 * r), (int) (3 * r), -dir+90, 180);   // Face in velocity's direction
 
     }
 

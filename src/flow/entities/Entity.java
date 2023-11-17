@@ -20,6 +20,9 @@ public abstract class Entity implements IEntity {
      */
     protected double r = 12; 
     
+    public double getR() {
+        return r;
+    }
 
     public Entity(Vec2 pos) {
         this.pos = new Vec2(pos);

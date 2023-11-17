@@ -84,7 +84,7 @@ public class ChainCreature extends HostileCreature {
 
             // Keep distance fixed between segments 
             double distance = bcurrent.pos.distanceFrom(bnext.pos); 
-            double desiredDistance = 30;
+            double desiredDistance = bcurrent.getR() + bnext.getR() + 5;
             if(distance > desiredDistance) { 
                 Vec2 displacement = (new Vec2(bcurrent.pos, bnext.pos)); 
                 displacement.normalize();
@@ -208,14 +208,14 @@ public class ChainCreature extends HostileCreature {
         dropTypes.add((pos)->new BiggerMouth(pos));
     }
     /**
-     * Spawn cells on death with 0.3 chance 
+     * Spawn cells on death with 0.1 chance 
      * for each body segment 
      */
     public List<PeacefulCell> getRemains() {
         ArrayList<PeacefulCell> remains = new ArrayList<>();
         body.forEach(segment -> {
             double r = Math.random();
-            if(r > 0.7) {
+            if(r > 0.9) {
                 int type = (int)Math.floor(Math.random() * dropTypes.size());
                 PeacefulCell c = dropTypes.get(type).apply(segment.getPos());
                 remains.add(c); 
