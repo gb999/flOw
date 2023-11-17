@@ -36,7 +36,7 @@ public abstract class HostileCreature extends Entity {
     }
     public void setSpeed(double speed) {
         this.speed = speed;
-        maxSpeed = 2 * speed;
+        maxSpeed = speed;
     }
 
     /**
@@ -97,8 +97,6 @@ public abstract class HostileCreature extends Entity {
         super.update();
         if (attackCooldown > 0 ) 
             attackCooldown = Math.max(0, restTime - (System.currentTimeMillis() - lastAttackTime));
-        
-
         //vel.mult(attackCooldown / restTime + 1);
     }
 }

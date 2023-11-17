@@ -34,7 +34,6 @@ public class ChainCreature extends HostileCreature {
             body.add(s);
         }
 
-        maxSpeed = 2 * speed;
     } 
 
     @Override

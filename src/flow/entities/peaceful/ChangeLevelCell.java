@@ -4,12 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import flow.Game;
-import flow.GameCanvas;
 import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
 public abstract class ChangeLevelCell extends PeacefulCell{
-    private long lastTime = 0;
     private long signalInterval = 3000;
     private long signalLength = 1500;
     private long lastSignalStart;
@@ -129,6 +127,5 @@ public abstract class ChangeLevelCell extends PeacefulCell{
         if(signal && currentTime - lastSignalStart > signalLength) {
             signal = false;
         }
-        lastTime = currentTime;
     }
 }
