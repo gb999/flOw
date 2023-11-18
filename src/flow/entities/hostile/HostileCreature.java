@@ -18,6 +18,7 @@ public abstract class HostileCreature extends Entity {
     protected long attackCooldown;
     protected long restTime;
     protected Edible closestEdible;
+    protected Edible closestPlayerSegment;
     protected Edible target;
 
     protected HostileCreature(Vec2 pos) {
@@ -86,6 +87,9 @@ public abstract class HostileCreature extends Entity {
     
     public void setClosestEdible(Edible edible) {
         closestEdible = edible;
+    }
+    public void setClosestPlayerSegment(Edible edible) {
+        closestPlayerSegment = edible;
     }
 
     public int getViewDistance() {

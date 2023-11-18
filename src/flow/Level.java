@@ -2,6 +2,8 @@ package flow;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Stack;
@@ -78,7 +80,8 @@ public class Level {
         this.color = color;
     }
 
-
+    
+    
     private void updateHostileCreatures() {
         // Check collisions between player and hostile creatures
         Mouth playerMouth = player.getMouth();  
@@ -86,10 +89,16 @@ public class Level {
         for(Iterator<HostileCreature> it = hostileCreatures.iterator(); it.hasNext(); ) {
             HostileCreature creature = it.next();
             creature.update();
-            if(creature.getPos().distanceFrom(player.pos) < creature.getViewDistance()) {
-                creature.setClosestEdible(player.getFirstEdibleSegment());
-                
+            
+            // Find closest edible player segment 
+            Vec2 creaturePos = creature.getPos();
+            Comparator<Edible> distComp  = Comparator.comparing(segment->creaturePos.distanceFrom(segment.getPos()));
+            if(creaturePos.distanceFrom(player.pos) < creature.getViewDistance()) {
+                Edible closestPlayerSegment = Collections.min(player.getEdibleSegments(), distComp);
+                creature.setClosestPlayerSegment(closestPlayerSegment);
             }
+            // find closest edible segment
+            creature.setClosestEdible(Collections.min(edibleCells, distComp));
 
             // Check if player's body is eaten.
             Mouth hostileMouth = creature.getMouth();
@@ -149,6 +158,7 @@ public class Level {
             }
 
             // Check if hostile creature eats cell 
+
             for(HostileCreature creature: hostileCreatures) {
                 if(Entity.intersects(creature.getMouth(), cell)) {
                     it.remove();

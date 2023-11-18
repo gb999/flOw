@@ -66,10 +66,4 @@ public class Player extends ChainCreature implements MouseListener {
         eat(new PeacefulCell(pos, 1)); 
         
     }
-
-    public Edible getFirstEdibleSegment() {
-        return getEdibleSegments().get(0);
-    }
-
-
 }

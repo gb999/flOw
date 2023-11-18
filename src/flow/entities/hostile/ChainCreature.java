@@ -106,8 +106,8 @@ public class ChainCreature extends HostileCreature {
         return edibleInDistance(target, attackDistance);
         
     }
-    private boolean closestEdibleInViewDistance() {
-        return edibleInDistance(closestEdible, viewDistance);
+    private boolean closestPlayerSegmentInViewDistance() {
+        return edibleInDistance(closestPlayerSegment, viewDistance);
     }
     private boolean  targetInViewDistance() {
         return edibleInDistance(target, viewDistance);
@@ -117,6 +117,8 @@ public class ChainCreature extends HostileCreature {
         lastAttackTime = System.currentTimeMillis();
         vel.mult(5);
         applyForce(vel);
+        attackCooldown = restTime;
+        target = null;
         
     }
 
@@ -127,23 +129,31 @@ public class ChainCreature extends HostileCreature {
     }
 
     protected void updateBehaviour() {
-        if(agressive && attackCooldown == 0) {
-            // set target
-            if(target != null) {
-                if(!targetInViewDistance()) target = null;
+        if(!agressive || attackCooldown > 0) return;
+        
+        if(target == null ) {
+            if(closestPlayerSegment != null && closestPlayerSegmentInViewDistance()) {
+                target = closestPlayerSegment;
             }
-            if(target == null && closestEdible != null) {
-                if(closestEdibleInViewDistance()) target = closestEdible;
-            }  
-            if(target != null) {
-                if(targetInAttackDistance()) {
-                    attack();
-                    target = null;  
-                    attackCooldown = restTime;
-                } else {
-                    followTarget();
-                }
+
+            if(closestEdible != null && closestEdibleInAttackDistance()) target = closestEdible; // (*)
+        }
+        
+        /**
+         * The line below causes creatures to be more interested in food, 
+         * than the player if there is many food on the level... 
+         * it has been moved to (*) for a better behaviour
+         * 
+         * if(closestEdible != null && closestEdibleInAttackDistance()) target = closestEdible;
+         **/ 
+
+        if(target != null) {
+            if(!targetInViewDistance()) {
+                target = null;
+                return;
             }
+            followTarget();
+            if(targetInAttackDistance()) attack();
         }
     } 
 
@@ -166,7 +176,7 @@ public class ChainCreature extends HostileCreature {
         g2.setColor(prevColor);
     }
 
-    protected ArrayList<Edible> getEdibleSegments() {
+    public ArrayList<Edible> getEdibleSegments() {
         ArrayList<Edible> edibleSegments = new ArrayList<>();
         for(BodySegment b : body) {
             if(b instanceof Edible)
