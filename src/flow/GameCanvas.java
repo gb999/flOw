@@ -28,11 +28,10 @@ public class GameCanvas extends JPanel {
         
         g2.translate(-cameraPos.x, -cameraPos.y);
         g2.setColor(Color.WHITE);
-        // player.draw(g2);
+
         Game.currentLevel.drawEntities(g2, true);
 
         if(Game.nextLevel != null) {
-
             g2.setColor(new Color(255,255,255,70));
             Game.nextLevel.drawEntities(g2, false);
         }

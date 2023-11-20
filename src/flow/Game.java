@@ -30,7 +30,7 @@ public class Game implements Runnable {
         if(next) {
             currentLevelIndex += 1; 
             currentLevel = nextLevel;
-            if(currentLevelIndex < levelLoaders.size() - 1)
+            if(currentLevelIndex + 1 < levelLoaders.size())
                 nextLevel = levelLoaders.get(currentLevelIndex + 1).loadLevel();
         } else {
             nextLevel = levelLoaders.get(currentLevelIndex).loadLevel();
@@ -39,8 +39,6 @@ public class Game implements Runnable {
         }        
         currentLevel.player = player;
     }
-
-
 
     private void initUI() {
         window = new JFrame("flOw");
@@ -72,8 +70,8 @@ public class Game implements Runnable {
 
     public void update() {
         player.update();
-        currentLevel.update();
-        //nextLevel.update();
+        currentLevel.update(true);
+        nextLevel.update(false);
     }
     
 
@@ -105,7 +103,7 @@ public class Game implements Runnable {
 
 
 
-    public void setLevelLoaders(ArrayList<LevelLoader> levelLoaders) {
-        this.levelLoaders = levelLoaders; 
+    public static void setLevelLoaders(ArrayList<LevelLoader> levelLoaders) {
+        Game.levelLoaders = levelLoaders; 
     }
 }

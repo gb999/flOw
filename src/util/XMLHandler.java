@@ -2,6 +2,10 @@ package util;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.function.Consumer;
+
+import javax.swing.text.html.Option;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -56,12 +60,24 @@ public class XMLHandler extends DefaultHandler {
                         Vec2 randomPos = Vec2.getRandomVec2InRadius(1000);
                         int length = Integer.parseInt(attributes.getValue("length"));
                         int nVitalSegments = Integer.parseInt(attributes.getValue("vitalSegments"));
-                        ChainCreature creature = new ChainCreature(randomPos, length, nVitalSegments);
-                        levelLoader.addCommand(level->level.addHostileCreature(creature));
+                        
                         boolean agressive = attributes.getValue("agressive") == null ? false : true;
+                        Optional<String> attackDistance = Optional.ofNullable(attributes.getValue("attack-distance"));
+                        Optional<String> viewDistance = Optional.ofNullable(attributes.getValue("view-distance"));
+                        Optional<String> restTime = Optional.ofNullable(attributes.getValue("rest-time"));
+                        Optional<String> speed = Optional.ofNullable(attributes.getValue("speed"));
+                        
+                        
+                        ChainCreature creature = new ChainCreature(randomPos, length, nVitalSegments);
+                                                
                         creature.setAgressive(agressive);
-                        double speed = Double.parseDouble(attributes.getValue("speed"));
-                        creature.setSpeed(speed);
+                        attackDistance.ifPresent(val-> creature.setAttackDistance(Integer.parseInt(val)));
+                        viewDistance.ifPresent(val -> creature.setViewDistance(Integer.parseInt(val)));
+                        restTime.ifPresent(val -> creature.setRestTime(Integer.parseInt(val)));
+                        speed.ifPresent(val -> creature.setSpeed(Double.parseDouble(val)));
+
+
+                        levelLoader.addCommand(level->level.addHostileCreature(creature));
                         break;
                     default:
                         throw new Error("No such creature as " + creatureType);
@@ -79,18 +95,19 @@ public class XMLHandler extends DefaultHandler {
             // Add cells for changing levels
             for(int i = 0 ; i < levelLoaders.size() - 1; i++) {
                 levelLoaders.get(i).addCommand(level-> {
-                    level.addEdible(new RedCell(Vec2.getRandomVec2InRadius(1500)));
+                    level.setRedCell(new RedCell(Vec2.getRandomVec2InRadius(1500)));
                 });
             }
             for(int i = 1 ; i < levelLoaders.size(); i++) {
                 levelLoaders.get(i).addCommand(level-> {
-                    level.addEdible(new BlueCell(Vec2.getRandomVec2InRadius(1500)));
+                    level.setBlueCell(new BlueCell(Vec2.getRandomVec2InRadius(1500)));
                 });
             }
             game.setLevelLoaders(levelLoaders);
         }
     }
 
-    
+
+
 }
 

@@ -150,6 +150,7 @@ public class ChainCreature extends HostileCreature {
     } 
     
     protected void updateBehaviour() {
+        if(target == null) changeDirectionRandomly();
         if(!agressive || attackCooldown > 0) return;
         
         if(target == null ) {
@@ -159,7 +160,6 @@ public class ChainCreature extends HostileCreature {
 
             if(closestEdible != null && closestEdibleInAttackDistance()) target = closestEdible; // (*)
             
-            changeDirectionRandomly();
         }
         
         /**

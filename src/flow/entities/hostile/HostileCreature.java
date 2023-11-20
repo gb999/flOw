@@ -13,8 +13,17 @@ import util.Vec2;
 public abstract class HostileCreature extends Entity {
     protected boolean agressive;
     protected double speed;
+
     protected int viewDistance;
     protected int attackDistance;
+    public int getAttackDistance() {
+        return attackDistance;
+    }
+
+    public void setAttackDistance(int attackDistance) {
+        this.attackDistance = attackDistance;
+    }
+
     protected long attackCooldown;
     protected long restTime;
     protected Edible closestEdible;
@@ -35,10 +44,12 @@ public abstract class HostileCreature extends Entity {
         attackCooldown = 0;
         lastAttackTime = 0;
     }
+
     public void setSpeed(double speed) {
         this.speed = speed;
         maxSpeed = speed;
     }
+
 
     /**
      * @return Mouth of this creature
@@ -101,6 +112,10 @@ public abstract class HostileCreature extends Entity {
     public void setAgressive(boolean value) {
         this.agressive = value;
     }
+    public void setRestTime(long value) {
+        this.restTime = value;
+    }
+    
 
     long lastAttackTime;
     @Override 

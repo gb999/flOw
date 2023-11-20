@@ -25,8 +25,10 @@ public abstract class ChangeLevelCell extends PeacefulCell{
 
     @Override
     public void draw(Graphics2D g2) {
-        Color color = g2.getColor();
-        g2.setColor(cellColor);
+        Color prevColor = g2.getColor();
+        Color currentColor = cellColor;
+        currentColor = new Color(cellColor.getRed(), cellColor.getGreen(), cellColor.getBlue(), prevColor.getAlpha());
+        g2.setColor(currentColor);
         super.draw(g2);
         
         double w = Game.canvas.getWidth();
@@ -112,7 +114,7 @@ public abstract class ChangeLevelCell extends PeacefulCell{
 
         }
 
-        g2.setColor(color);
+        g2.setColor(prevColor);
     }
 
     @Override

@@ -1,23 +1,30 @@
 <Game>
-    <Level color = "#00000f"> 
     <!-- Player should not be able to die on Level 1, so there should be no hostile creatures-->
-        <SpawnPeacefulCells count = "100" foodValue = "2"/> 
-        <SpawnPeacefulCells count = "100" foodValue = "1"/> 
-        <SpawnHostileCreature type = "ChainCreature" length = "10" vitalSegments = "2" speed = "20" agressive = "true" /> 
-        <SpawnHostileCreature type = "ChainCreature" length = "10" vitalSegments = "2" speed = "10" agressive = "true" /> 
-        <SpawnHostileCreature type = "ChainCreature" length = "10" vitalSegments = "2" speed = "6" agressive = "true" /> 
-        <SpawnHostileCreature type = "ChainCreature" length = "10" vitalSegments = "2" speed = "2" agressive = "true" /> 
-    </Level>
     <Level color = "#78acff">  
-        <SpawnHostileCreature type = "ChainCreature" length = "5" vitalSegments = "2" speed = "0.1" /> 
-        <!-- <SpawnPeacefulCells count = "100" foodValue = "1"/>  -->
-        <!-- <SpawnHostileCreature type = "HostileCreature" speed = "" agressive = "true" view-distance = "" attack-distance = "" rest-time = "" /> -->
+        <SpawnPeacefulCells count = "100" foodValue = "1"/> 
     </Level>
-    <Level color = "#619eff">  
 
-        <!-- <SpawnPeacefulCells count = "100" foodValue = "1"/>  -->
+    <Level color = "#8facff"> 
+        <SpawnPeacefulCells count = "10" foodValue = "1"/> 
+        <SpawnHostileCreature type = "ChainCreature" length = "4" vitalSegments = "1" speed = "10"  /> 
+        <SpawnHostileCreature type = "ChainCreature" length = "4" vitalSegments = "1" speed = "10"  /> 
+        <SpawnHostileCreature type = "ChainCreature" length = "4" vitalSegments = "1" speed = "10"  /> 
+        <SpawnHostileCreature type = "ChainCreature" length = "4" vitalSegments = "1" speed = "10"  /> 
     </Level>
+
+    <Level color = "#619eff">  
+        <SpawnPeacefulCells count = "100" foodValue = "2"/> 
+        <SpawnHostileCreature type = "ChainCreature" length = "10" vitalSegments = "3" speed = "12" agressive = "true" /> 
+        <SpawnHostileCreature type = "ChainCreature" length = "10" vitalSegments = "3" speed = "12" agressive = "true" /> 
+        <SpawnHostileCreature type = "ChainCreature" length = "10" vitalSegments = "3" speed = "12" agressive = "true"/> 
+    </Level>
+
     <Level color = "#4d91ff">  
+        <SpawnPeacefulCells count = "5" foodValue = "3"/> 
+    </Level>
+
+    <Level color = "#00000f">  
+    <SpawnHostileCreature type = "ChainCreature" length = "10" vitalSegments = "10" speed = "25" agressive = "true" />
     </Level>
     
 </Game>

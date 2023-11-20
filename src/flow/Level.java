@@ -81,7 +81,6 @@ public class Level {
     }
 
     
-    
     private void updateHostileCreatures() {
         // Check collisions between player and hostile creatures
         Mouth playerMouth = player.getMouth();  
@@ -89,7 +88,7 @@ public class Level {
         for(Iterator<HostileCreature> it = hostileCreatures.iterator(); it.hasNext(); ) {
             HostileCreature creature = it.next();
             creature.update();
-            
+
             // Find closest edible player segment 
             Vec2 creaturePos = creature.getPos();
             Comparator<Edible> distComp  = Comparator.comparing(segment->creaturePos.distanceFrom(segment.getPos()));
@@ -99,6 +98,7 @@ public class Level {
             }
             // find closest edible segment
             creature.setClosestEdible(Collections.min(edibleCells, distComp));
+            
 
             // Check if player's body is eaten.
             Mouth hostileMouth = creature.getMouth();
@@ -128,19 +128,27 @@ public class Level {
         }
     }
 
-    private void updatePeacefulCells() {
-        Mouth playerMouth = player.getMouth();  
-        
-        // Check collisions between player and blue/red cells 
-        if(redCell != null && Entity.intersects(playerMouth, redCell)) {
-            redCell.update();
-            redCell.isEatenBy(player);
-            redCell = null;
-        }
-        if(blueCell != null && Entity.intersects(playerMouth, blueCell)) {
-            blueCell.update();
-            blueCell.isEatenBy(player);
-            blueCell = null;
+    private void updatePeacefulCells(boolean isCurrent) {
+        Mouth playerMouth = null;
+        if (isCurrent) {
+            playerMouth = player.getMouth();  
+            
+            // Check collisions between player and blue/red cells 
+            if(redCell != null) {
+                redCell.update();
+
+                if(Entity.intersects(playerMouth, redCell)) {
+                    redCell.isEatenBy(player);
+                    redCell = null;
+                }
+            }
+            if(blueCell != null ) {
+                blueCell.update();
+                if( Entity.intersects(playerMouth, blueCell)) {
+                    blueCell.isEatenBy(player);
+                    blueCell = null;
+                }
+            }
         }
                
 
@@ -149,12 +157,14 @@ public class Level {
         for(Iterator<PeacefulCell> it = edibleCells.iterator(); it.hasNext();  ) {
             PeacefulCell cell = it.next();
             cell.update();
+            if(isCurrent) {
 
-            // Check if player eats cell 
-            if(Entity.intersects(playerMouth, cell)) {
-                it.remove();
-                addEdible(player.eat(cell));            
-                continue; // Food can only ne eaten once
+                // Check if player eats cell 
+                if(Entity.intersects(playerMouth, cell)) {
+                    it.remove();
+                    addEdible(player.eat(cell));            
+                    continue; // Food can only ne eaten once
+                }
             }
 
             // Check if hostile creature eats cell 
@@ -169,16 +179,18 @@ public class Level {
         }
     }
 
-    public void update() {
+    public void update(boolean isCurrent) {
         // Spawn peaceful cells if needed.
         while(!spawnPeacefulStack.isEmpty()) {
             edibleCells.add(spawnPeacefulStack.pop());
         }
-
-        updateHostileCreatures();
+        if(isCurrent)
+            updateHostileCreatures();
+        else
+            hostileCreatures.forEach(e->e.update());
         
-        updatePeacefulCells();
-
+        
+        updatePeacefulCells(isCurrent);
 
     }
 
@@ -193,12 +205,9 @@ public class Level {
             if(blueCell != null) blueCell.draw(g2);
             player.draw(g2);
         }
-        for(Entity e: edibleCells) {
-            e.draw(g2);
-        }
-        for(Entity e: hostileCreatures) {
-            e.draw(g2);
-        }
+        
+        edibleCells.forEach(e->e.draw(g2));
+        hostileCreatures.forEach(e->e.draw(g2));
         
     }
 }
