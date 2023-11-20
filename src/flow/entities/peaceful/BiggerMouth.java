@@ -17,7 +17,7 @@ public class BiggerMouth extends PeacefulCell {
     @Override
     public void draw(Graphics2D g2) {
         super.draw(g2);
-        g2.drawArc((int)(pos.x + r/2), (int)(pos.y + r/2)  , 20, 20, 0, 180);
+        g2.drawArc((int)(pos.x - r/2), (int)(pos.y - r/4)  , (int)r/2, (int)r/2, 0, 180);
     }
     
 }

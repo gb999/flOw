@@ -1,9 +1,11 @@
 package flow.entities.peaceful;
 
 import java.awt.Graphics2D;
+import java.awt.Shape;
 
 import flow.entities.Edible;
 import flow.entities.Entity;
+import util.Ring;
 import util.Vec2;
 
 public class PeacefulCell extends Entity implements Edible {
@@ -20,7 +22,9 @@ public class PeacefulCell extends Entity implements Edible {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.drawOval((int)pos.x, (int)pos.y, 32, 32);
+        // g2.drawOval((int)pos.x, (int)pos.y, 32, 32);
+        double innerRadius = Math.max(r - ((double)foodValue + 1) / r * 4 - 1,0);
+        g2.fill(Ring.create(pos.x, pos.y, innerRadius, r));
     }
 
     @Override

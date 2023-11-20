@@ -225,12 +225,12 @@ public class ChainCreature extends HostileCreature {
         ArrayList<PeacefulCell> remains = new ArrayList<>();
         body.forEach(segment -> {
             double r = Math.random();
-            if(r > 0.9) {
+            //if(r > 0.9) {
                 int type = (int)Math.floor(Math.random() * dropTypes.size());
                 PeacefulCell c = dropTypes.get(type).apply(segment.getPos());
                 remains.add(c); 
 
-            }
+            //}
         });
         return remains;
     }

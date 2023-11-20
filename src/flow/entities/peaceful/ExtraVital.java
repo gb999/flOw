@@ -20,8 +20,8 @@ public class ExtraVital extends PeacefulCell {
     public void draw(Graphics2D g2) {
         super.draw(g2);
         Font font = g2.getFont();
-        g2.setFont(new Font(font.getFamily(), font.getStyle(), 32));
-        g2.drawString(String.valueOf("+"), (int) (pos.x+ r/2), (int) (pos.y + 20+ r/2));
+        g2.setFont(new Font(font.getFamily(), font.getStyle(), (int)(2 * r)));
+        g2.drawString(String.valueOf("+"), (int) (pos.x - 4), (int)(pos.y + 10));
     }
 
     
