@@ -128,6 +128,27 @@ public class ChainCreature extends HostileCreature {
         vel.setDir(dir);
     }
 
+    /**
+     * @return a random time interval between 3 and 8 seconds
+     * 
+     */
+    private long newDirectionChangeInterval() {
+        return 3000 + (int)Math.floor(Math.random() * 5000);
+    }
+
+    private long lastRandomDirectionChangeTime = 0;
+    private long nextDirectionChangeInterval = newDirectionChangeInterval();
+    
+    private void changeDirectionRandomly() {
+        long currentTime = System.currentTimeMillis();
+        if(currentTime - lastRandomDirectionChangeTime > nextDirectionChangeInterval) {
+            Vec2 randomDir = Vec2.getRandomVec2InRadius(1);
+            vel.setDir(randomDir);
+            nextDirectionChangeInterval = newDirectionChangeInterval();
+            lastRandomDirectionChangeTime = currentTime;
+        }
+    } 
+    
     protected void updateBehaviour() {
         if(!agressive || attackCooldown > 0) return;
         
@@ -137,6 +158,8 @@ public class ChainCreature extends HostileCreature {
             }
 
             if(closestEdible != null && closestEdibleInAttackDistance()) target = closestEdible; // (*)
+            
+            changeDirectionRandomly();
         }
         
         /**
@@ -225,12 +248,12 @@ public class ChainCreature extends HostileCreature {
         ArrayList<PeacefulCell> remains = new ArrayList<>();
         body.forEach(segment -> {
             double r = Math.random();
-            //if(r > 0.9) {
+            if(r > 0.9) {
                 int type = (int)Math.floor(Math.random() * dropTypes.size());
                 PeacefulCell c = dropTypes.get(type).apply(segment.getPos());
                 remains.add(c); 
 
-            //}
+            }
         });
         return remains;
     }
