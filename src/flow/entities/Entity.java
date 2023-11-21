@@ -20,6 +20,9 @@ public abstract class Entity implements IEntity {
      */
     protected double r = 12; 
     
+    /**
+     * @return radius of entity
+     */
     public double getR() {
         return r;
     }
@@ -32,28 +35,42 @@ public abstract class Entity implements IEntity {
 
     }
 
+    /**
+     * Updates movement of entity. 
+     */
     public void update() {
-        pos.add(vel);
-
+        pos.add(vel); 
+        
         vel.add(acc);
+
 
         // ~Friction 
         acc.mult(0.7);
         
         // Limit  speed
         if(vel.getLength() > maxSpeed) {
-            //vel.normalize();
             vel.mult(0.7);
-            // vel.mult(30);
         }
         
         
     };
+
+    /**
+     * Applies a "force" to the entity, adds force to accelration. 
+     * @param force
+     */
     public void applyForce(Vec2 force) {
         acc.add(force);
     }
+
+    /**
+     * Draws the entity on the canvas. All Entities should override this method.
+     */
     public abstract void draw(Graphics2D g2);
 
+    /**
+     * Returns a rectangle containing the entity, used for collision detection
+     */
     public Rectangle getBoundingBox() {
         return new Rectangle(
             (int)(this.pos.x - this.r),
@@ -62,6 +79,10 @@ public abstract class Entity implements IEntity {
             (int)(2 * r));
     }
 
+    /**
+     * Checks if 2 entities intersect
+     * @return true if bounding box of e1 and e2 intersect
+     */
     public static boolean intersects(Entity e1, Entity e2) {
         Rectangle r1 = e1.getBoundingBox();
         double x1 = r1.getX();

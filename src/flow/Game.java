@@ -40,6 +40,9 @@ public class Game implements Runnable {
         currentLevel.player = player;
     }
 
+    /**
+     * Initializes Swing GUI
+     */
     private void initUI() {
         window = new JFrame("flOw");
         window.setSize(600, 400);
@@ -52,6 +55,7 @@ public class Game implements Runnable {
         window.setVisible(true);
     }
 
+
     public Game() {
         initUI();
         currentLevelIndex = 0;
@@ -59,6 +63,7 @@ public class Game implements Runnable {
         player = new Player(new Vec2(0,0));
         gameThread = new Thread(this);
     }
+    
     
     public void start() {
         currentLevel = levelLoaders.get(0).loadLevel();
@@ -68,13 +73,18 @@ public class Game implements Runnable {
     }
 
 
+    /**
+     * Called FPS times per second. Updates all entities
+     */
     public void update() {
         player.update();
         currentLevel.update(true);
         nextLevel.update(false);
     }
     
-
+    /**
+     * Paints everything
+     */
     public void repaint() {
         canvas.repaint();
     }
@@ -101,8 +111,10 @@ public class Game implements Runnable {
         }
     }
 
-
-
+    /**
+     * Sets levelLoaders. LevelLoaders are used to reload levels, when player enters another level.
+     * @param levelLoaders list of the loaders
+     */
     public static void setLevelLoaders(ArrayList<LevelLoader> levelLoaders) {
         Game.levelLoaders = levelLoaders; 
     }

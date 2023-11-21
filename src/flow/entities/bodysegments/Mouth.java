@@ -28,7 +28,7 @@ public class Mouth extends BodySegment {
         return r;
     }
     /**
-     * Sets size to r* size
+     * Sets size to r * size
      * @param size
      */
     public void setSize(double size) {

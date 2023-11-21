@@ -11,6 +11,9 @@ public class ExtraVital extends PeacefulCell {
     public ExtraVital(Vec2 pos) {
         super(pos, 1);
     }
+    /**
+     * Grows a new vital segment for the hostile creature
+     */
     @Override
     public void isEatenBy(HostileCreature creature) {
         creature.growVital();

@@ -73,11 +73,15 @@ public class Level {
         edibleCells = new ArrayList<>();
         hostileCreatures = new ArrayList<>();
     }
+
     public void setColor(Color color) {
         this.color = color;
     }
 
-    
+    /**
+     * Updates all hostile creatures, handles interactions between peaceful and hostile creatures
+     * and between player and hostile creatures.  
+     */
     private void updateHostileCreatures() {
         // Check collisions between player and hostile creatures
         Mouth playerMouth = player.getMouth();  
@@ -186,8 +190,8 @@ public class Level {
         if(isCurrent)
             updateHostileCreatures();
         else
-            hostileCreatures.forEach(e->e.update());
-        
+            // Update hostile creatures on next level. They should not interact with entities until player enters the level.
+            hostileCreatures.forEach(e->e.update()); 
         
         updatePeacefulCells(isCurrent);
 

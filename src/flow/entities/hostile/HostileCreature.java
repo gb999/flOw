@@ -106,12 +106,15 @@ public abstract class HostileCreature extends Entity {
     public int getViewDistance() {
         return viewDistance;
     };
+
     public void setViewDistance(int viewDistance) {
         this.viewDistance = viewDistance;
     };
+
     public void setAgressive(boolean value) {
         this.agressive = value;
     }
+
     public void setRestTime(long value) {
         this.restTime = value;
     }
@@ -123,6 +126,5 @@ public abstract class HostileCreature extends Entity {
         super.update();
         if (attackCooldown > 0 ) 
             attackCooldown = Math.max(0, restTime - (System.currentTimeMillis() - lastAttackTime));
-        //vel.mult(attackCooldown / restTime + 1);
     }
 }

@@ -35,3 +35,30 @@ Ez a package tartalmazza a játékhoz tartozó segédclassokat.
 - Ring: A create metódusával létrehozható egy gyűrű alakzat, a játék grafikájához többször szükség volt rá.
 
 
+# A játék működése 
+A Game class másodpercenként 30-szor frissíti a pályákat és kirajzoltatja őket. A Level classokon belül történik az interakciók kezelése a lények között. Szintek váltásakor újratöltődnek a LevelLoaderek segítségével a megfelelő szintek.
+
+
+# Felhasználói kézikönyv
+A játékos lénye az egér mozgatásával irányítható és a bal egérgomb lenyomásával gyorsítható.
+
+# Eltérések a specifikációtól
+- Az ellenségeslények csak akkor támadják meg az attack-distancen belüli lényeket, ha nincsen kiszemelt áldozatuk. Ez értelmesebb viselkedést eredményez.
+- A játékos szintjét követő szinten csak mozognak az ellenséges lények, ha véletlen nekiütköznek egy békés sejtnek, legfeljebb akkor eszik meg, a támadási logikájuk ki van kapcsolva, amíg a játékos nem ér a szintre.
+
+
+# Programozói dokumentáció
+A programozói dokumentáció Javadoc commentek formájában található a programban. 
+A fontosabb metódusok listája:
+- Game.update 
+- Game.run
+- Level.update
+- Level.drawEntities
+- Entity.update
+- BodySegment.saturate
+- HostileCreature.update
+- ChainCreature.eat
+- ChainCreature.update
+- ChangeLevelCell.update
+- Edible.isEatenBy
+

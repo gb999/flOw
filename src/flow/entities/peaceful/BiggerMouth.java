@@ -10,10 +10,15 @@ public class BiggerMouth extends PeacefulCell {
     public BiggerMouth(Vec2 pos) {
         super(pos, 1);
     }
+    
+    /**
+     * Makes the hostile creature's mouth 1.5 times its size.
+     */
     @Override
     public void isEatenBy(HostileCreature creature) {
         creature.getMouth().setSize(1.5);
     }
+
     @Override
     public void draw(Graphics2D g2) {
         super.draw(g2);

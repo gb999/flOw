@@ -5,6 +5,10 @@ import java.util.function.Consumer;
 
 import flow.Level;
 
+/**
+ * This class is userd to build a level.
+ *  
+ */
 public class LevelLoader {
     ArrayList<Consumer<Level>> commands;    
 
@@ -15,6 +19,10 @@ public class LevelLoader {
         commands.add(command);
     }
 
+    /**
+     * Creates a level and executes all commands loaded into thios LevelLoader
+     * @return the generated level
+     */
     public Level loadLevel() {
         Level level = new Level();
         commands.forEach(command -> command.accept(level));

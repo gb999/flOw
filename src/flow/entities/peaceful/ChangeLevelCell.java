@@ -7,6 +7,9 @@ import flow.Game;
 import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
+/**
+ * Logic for Red and Blue Cells. 
+ */
 public abstract class ChangeLevelCell extends PeacefulCell{
     private long signalInterval = 3000;
     private long signalLength = 1500;
@@ -67,6 +70,8 @@ public abstract class ChangeLevelCell extends PeacefulCell{
             // x = (+ h/2) / (y2 - py) * (x2 - px) + px
             // x = (- h/2) / (y2 - py) * (x2 - px) + px
 
+            // CALCULATE INTERSECTION OF SCREEN EDGE AND LINE BETWEEN PLAYER AND CELL
+
             // intersection(ix, iy)
             double ix = 0; 
             double iy = 0; 
@@ -117,6 +122,9 @@ public abstract class ChangeLevelCell extends PeacefulCell{
         g2.setColor(prevColor);
     }
 
+    /**
+     * Send a signal every 3 seconds
+     */
     @Override
     public void update() {
         long currentTime = System.currentTimeMillis();

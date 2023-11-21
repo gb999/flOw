@@ -10,9 +10,7 @@ import util.XMLHandler;
 
 public class App extends JFrame {
     public static void main(String[] args){
-        //Game game = new Game();
-        //game.start();
-
+        // Load levels and start game
         File file = new File("resources/levels.xml");
         XMLHandler handler = new XMLHandler();
         SAXParser parser;

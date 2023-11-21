@@ -34,7 +34,7 @@ public class ChainCreature extends HostileCreature implements Cloneable {
 
         return creature;
     }
-    
+
     protected LinkedList<BodySegment> body;
     Mouth mouth;
     public ChainCreature(Vec2 pos, int length, int nVitalSegments) {
@@ -53,6 +53,11 @@ public class ChainCreature extends HostileCreature implements Cloneable {
 
     } 
 
+    /**
+     * This creature eats and digests the food.
+     * Returns the remaining food as a new Peaceful Cell if this becomes oversaturated 
+     * Grows a new cell if body is fully saturated, uses up the saturation of all non edible bodysegments
+     */
     @Override
     public PeacefulCell eat(Edible food) {
         // Digest
@@ -84,6 +89,9 @@ public class ChainCreature extends HostileCreature implements Cloneable {
         return null;
     }
 
+    /**
+     * Updates the movement of the body
+     */
     private void updateBody() {
         // the Mouth pulls the whole body
         mouth.vel = this.vel;

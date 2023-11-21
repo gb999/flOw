@@ -12,6 +12,9 @@ public class BlueCell extends ChangeLevelCell{
         super(pos, new Color(0,0, 255));
     }
     
+    /**
+     * Changes level to previous level
+     */
     @Override
     public void isEatenBy(HostileCreature creature) {
         Game.changeLevel(false);

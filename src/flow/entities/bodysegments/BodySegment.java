@@ -3,9 +3,10 @@ package flow.entities.bodysegments;
 import flow.entities.Entity;
 import util.Vec2;
 
+/**
+ * Representation of a Body Segment of a creature. 
+ */
 public abstract class BodySegment extends Entity  {
-    
-    
     protected BodySegment(Vec2 pos) {
         super(pos);
         this.pos = new Vec2(pos);

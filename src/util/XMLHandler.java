@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Optional;
 
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -14,6 +13,9 @@ import flow.entities.hostile.ChainCreature;
 import flow.entities.peaceful.BlueCell;
 import flow.entities.peaceful.RedCell;
 
+/**
+ * Reads an XML file containing all game information. 
+ */
 public class XMLHandler extends DefaultHandler {
     private static final String GAME = "Game";
     private static final String LEVEL = "Level";

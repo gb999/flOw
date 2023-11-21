@@ -21,8 +21,7 @@ public class PeacefulCell extends Entity implements Edible {
 
     @Override
     public void draw(Graphics2D g2) {
-        // g2.drawOval((int)pos.x, (int)pos.y, 32, 32);
-        // width is proportional to foodValue
+        // Line width is proportional to foodValue
         double innerRadius = Math.max(r - ((double)foodValue + 1) / r * 4 - 1,0);
         g2.fill(Ring.create(pos.x, pos.y, innerRadius, r));
     }
