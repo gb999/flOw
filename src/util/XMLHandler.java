@@ -63,7 +63,6 @@ public class XMLHandler extends DefaultHandler {
                         Optional<String> restTime = Optional.ofNullable(attributes.getValue("rest-time"));
                         Optional<String> speed = Optional.ofNullable(attributes.getValue("speed"));
                         
-                        
                         ChainCreature creature = new ChainCreature(randomPos, length, nVitalSegments);
                                                 
                         creature.setAgressive(agressive);
@@ -73,7 +72,7 @@ public class XMLHandler extends DefaultHandler {
                         speed.ifPresent(val -> creature.setSpeed(Double.parseDouble(val)));
 
 
-                        levelLoader.addCommand(level->level.addHostileCreature(creature));
+                        levelLoader.addCommand(level->level.addHostileCreature(creature.clone()));
                         break;
                     default:
                         throw new Error("No such creature as " + creatureType);
@@ -102,8 +101,4 @@ public class XMLHandler extends DefaultHandler {
             Game.setLevelLoaders(levelLoaders);
         }
     }
-
-
-
 }
-

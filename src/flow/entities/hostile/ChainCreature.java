@@ -20,7 +20,21 @@ import flow.entities.peaceful.PeacefulCell;
 import util.Vec2;
 
 
-public class ChainCreature extends HostileCreature {
+public class ChainCreature extends HostileCreature implements Cloneable {
+    @Override 
+    public ChainCreature clone() {
+         
+        int l = getEdibleSegments().size();
+        ChainCreature creature = new ChainCreature(pos, body.size(), l);
+        creature.agressive = this.agressive;
+        creature.viewDistance = this.viewDistance;
+        creature.attackDistance = this.attackDistance;
+        creature.setSpeed(this.speed);
+        creature.restTime = this.restTime;
+
+        return creature;
+    }
+    
     protected LinkedList<BodySegment> body;
     Mouth mouth;
     public ChainCreature(Vec2 pos, int length, int nVitalSegments) {

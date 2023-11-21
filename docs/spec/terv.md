@@ -25,10 +25,10 @@ abstract class Entity {
     + void draw()
 
 }
-class HostileEntity extends Entity {
+abstract HostileCreature extends Entity {
     eat(int foodValue)
 }
-class ChainCreature extends HostileEntity {
+class ChainCreature extends HostileCreature {
     LinkedList<BodySegment> body
 }
 class Player extends ChainCreature {
@@ -39,14 +39,16 @@ class PeacefulCell extends Entity implements Edible {
     + void update()
 }
 
-class BlueCell extends PeacefulCell 
-class RedCell extends PeacefulCell 
+abstract ChangeLevelCell extends PeacefulCell 
+
+class BlueCell extends ChangeLevelCell 
+class RedCell extends ChangeLevelCell 
 class ExtraVital extends PeacefulCell
 class BiggerMouth extends PeacefulCell
 
 
 interface Edible {
-    void isEatenBy(HostileEntity, foodValue)
+    void isEatenBy(HostileCreature)
 }
 
 abstract BodySegment extends Entity {

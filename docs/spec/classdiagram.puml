@@ -1,15 +1,21 @@
 @startuml
 package entities {
-    abstract class Entity {
+    abstract class Entity implements IEntity {
         - Vec2 pos
         - Vec2 vel
         - Vec2 acc
 
         + update()
-        + render()
+        + draw()
+    }
+    interface IEntity {
+          public void update();
+        public void draw(Graphics2D g2);
+
+        public Vec2 getPos();
     }
 
-    interface Edible {
+    interface Edible extends IEntity {
         + int getFoodValue()
         + void isEatenBy(HostileCreature)
     } 
@@ -35,9 +41,12 @@ package entities.hostile {
         + boolean isAlive()
         + void getRemains()
     }
+    class ChainCreature extends HostileCreature
 }
 
 package entities.peaceful {
+    class PeacefulCell
+    class ChangeLevelCell  extends PeacefulCell
 
 }
 
@@ -49,15 +58,21 @@ package util {
         double x
         double y
     }
+    class LevelLoader {
+        
+    }
+    class XMLHandler
 }
 
 
 class Game {
 }
 
+class Player extends entities.hostile.ChainCreature
+
 class Level {
 
 }
-
-
+Level *-- Game
+Player *-- Game
 @enduml

@@ -20,6 +20,4 @@ public class SimpleSegment extends BodySegment {
         }
 
     }
-
-
 }
