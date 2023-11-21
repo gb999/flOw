@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import flow.entities.Edible;
 import flow.entities.bodysegments.BodySegment;
 import flow.entities.hostile.ChainCreature;
 import flow.entities.peaceful.PeacefulCell;

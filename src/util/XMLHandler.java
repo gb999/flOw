@@ -3,19 +3,15 @@ package util;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.function.Consumer;
 
-import javax.swing.text.html.Option;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import flow.Game;
-import flow.Level;
 import flow.entities.hostile.ChainCreature;
 import flow.entities.peaceful.BlueCell;
-import flow.entities.peaceful.PeacefulCell;
 import flow.entities.peaceful.RedCell;
 
 public class XMLHandler extends DefaultHandler {
@@ -103,7 +99,7 @@ public class XMLHandler extends DefaultHandler {
                     level.setBlueCell(new BlueCell(Vec2.getRandomVec2InRadius(1500)));
                 });
             }
-            game.setLevelLoaders(levelLoaders);
+            Game.setLevelLoaders(levelLoaders);
         }
     }
 

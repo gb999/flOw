@@ -1,7 +1,6 @@
 package flow.entities.peaceful;
 
 import java.awt.Graphics2D;
-import java.awt.Shape;
 
 import flow.entities.Edible;
 import flow.entities.Entity;
