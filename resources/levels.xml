@@ -24,7 +24,7 @@
     </Level>
 
     <Level color = "#00000f">  
-    <SpawnHostileCreature type = "ChainCreature" length = "10" vitalSegments = "10" speed = "25" agressive = "true" />
+    <SpawnHostileCreature type = "ChainCreature" length = "10" vitalSegments = "10" speed = "15" agressive = "true" />
     </Level>
     
 </Game>

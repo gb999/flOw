@@ -14,13 +14,17 @@ public class GameCanvas extends JPanel {
         canvas = this;
     }
     
-
+    /**
+     * Draws the whole game 
+     */
     public void paint(Graphics g) {
+        // Avoid Exception thrown by swing when drawing component 
+        if(Game.currentLevel == null) return;
+
         Player player = Game.player;
         Vec2 cameraPos = new Vec2(player.pos.x - getWidth() / 2, player.pos.y - getHeight() / 2);
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
-        
         // Background
         g2.setColor(Game.currentLevel.color);
         g2.fillRect(0, 0,  getWidth(), getHeight());

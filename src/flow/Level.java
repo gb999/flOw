@@ -72,9 +72,6 @@ public class Level {
         this.color = new Color(100, 100, 255);
         edibleCells = new ArrayList<>();
         hostileCreatures = new ArrayList<>();
-
-        // hostileCreatures.add(new ChainCreature(new Vec2(270, 500)));
-        // hostileCreatures.get(0).applyForce(new Vec2(0.1,0));
     }
     public void setColor(Color color) {
         this.color = color;
@@ -96,8 +93,10 @@ public class Level {
                 Edible closestPlayerSegment = Collections.min(player.getEdibleSegments(), distComp);
                 creature.setClosestPlayerSegment(closestPlayerSegment);
             }
-            // find closest edible segment
-            creature.setClosestEdible(Collections.min(edibleCells, distComp));
+            
+            // Find closest edible segment to creature
+            if(!edibleCells.isEmpty())
+                creature.setClosestEdible(Collections.min(edibleCells, distComp));
             
 
             // Check if player's body is eaten.
@@ -195,8 +194,9 @@ public class Level {
     }
 
     /**
-     * 
-     * @param g2
+     * Draws entities on level.
+     * If current is true also draws player and  blue and red cells. 
+     * @param g2 graphis objet
      * @param current is true if this is the current level
      */
     public void drawEntities(Graphics2D g2, boolean current) {
