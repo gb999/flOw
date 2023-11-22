@@ -44,8 +44,6 @@ public abstract class BodySegment extends Entity  {
         return amount - digestedAmount;
     }
     
-
-
     /**
      * BodySegments are updated by the creature owning this segment. 
      * This method should not be overridden.

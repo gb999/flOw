@@ -15,4 +15,5 @@ public interface Edible extends IEntity {
      * @param creature creature eating this
      */
     public default void isEatenBy(HostileCreature creature) {};
+
 }

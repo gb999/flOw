@@ -10,6 +10,7 @@ import java.util.Stack;
 
 import flow.entities.Edible;
 import flow.entities.Entity;
+import flow.entities.IEntity;
 import flow.entities.bodysegments.Mouth;
 import flow.entities.hostile.HostileCreature;
 import flow.entities.peaceful.BlueCell;
@@ -77,6 +78,17 @@ public class Level {
     public void setColor(Color color) {
         this.color = color;
     }
+    
+    /**
+     * Finds closest entity from list to entity.
+     * @param <T> T any Child class of Entity
+     */
+    private <T extends IEntity> T findClosestEntity(Entity entity, List<T> list) {
+        Comparator<T> distanceComparator = Comparator.comparing(e -> entity.pos.distanceFrom(e.getPos()));
+        if(list.isEmpty()) return null;
+        T closestEntity = Collections.min(list, distanceComparator);
+        return closestEntity;
+    }
 
     /**
      * Updates all hostile creatures, handles interactions between peaceful and hostile creatures
@@ -92,20 +104,17 @@ public class Level {
 
             // Find closest edible player segment 
             Vec2 creaturePos = creature.getPos();
-            Comparator<Edible> distComp  = Comparator.comparing(segment->creaturePos.distanceFrom(segment.getPos()));
             if(creaturePos.distanceFrom(player.pos) < creature.getViewDistance()) {
-                Edible closestPlayerSegment = Collections.min(player.getEdibleSegments(), distComp);
+                Edible closestPlayerSegment = findClosestEntity(creature, player.getEdibleSegments());;
                 creature.setClosestPlayerSegment(closestPlayerSegment);
             }
             
             // Find closest edible segment to creature
             if(!edibleCells.isEmpty())
-                creature.setClosestEdible(Collections.min(edibleCells, distComp));
-            
+                creature.setClosestEdible(findClosestEntity(creature, edibleCells));
 
             // Check if player's body is eaten.
-            Mouth hostileMouth = creature.getMouth();
-            Edible ediblePlayerSegment = player.checkCollisionsWithMouth(hostileMouth);
+            Edible ediblePlayerSegment = player.checkCollisionsWithMouth(creature.getMouth());
             if(ediblePlayerSegment != null) {
                 addEdible(creature.eat(ediblePlayerSegment));
 
@@ -130,52 +139,53 @@ public class Level {
         }
     }
 
-    private void updatePeacefulCells(boolean isCurrent) {
-        Mouth playerMouth = null;
-        if (isCurrent) {
-            playerMouth = player.getMouth();  
-            
-            // Check collisions between player and blue/red cells 
-            if(redCell != null) {
-                redCell.update();
-
-                if(Entity.intersects(playerMouth, redCell)) {
-                    redCell.isEatenBy(player);
-                    redCell = null;
-                }
-            }
-            if(blueCell != null ) {
-                blueCell.update();
-                if( Entity.intersects(playerMouth, blueCell)) {
-                    blueCell.isEatenBy(player);
-                    blueCell = null;
-                }
-            }
+    /**
+     * creature eats food if its mouth intersects with the food
+     * @param creature
+     * @param food
+     * @return true if food was eaten
+     */
+    private boolean eatIfMouthIntersects(HostileCreature creature, Edible food) {
+        if(creature == null || food == null) return false;
+        Mouth mouth = creature.getMouth();
+        if(Entity.intersects(mouth, food)) {
+            addEdible(creature.eat(food));
+            return true;
         }
-               
+        return false;        
+    }
+
+    private void updateLevelChangerCells() {
+        if(redCell != null) {
+            redCell.update();
+            eatIfMouthIntersects(player, redCell);
+        } 
+        if(blueCell != null) {
+            blueCell.update();
+            eatIfMouthIntersects(player, redCell);
+        } 
+    }
+
+    private void updatePeacefulCells(boolean isCurrent) {
+        if (isCurrent) {
+            updateLevelChangerCells();
+        }
 
         // Check collisions between hostile and peaceful cells
         // Using an iterator makes it safe to remove elements while iterating   
         for(Iterator<PeacefulCell> it = edibleCells.iterator(); it.hasNext();  ) {
             PeacefulCell cell = it.next();
             cell.update();
-            if(isCurrent) {
-
-                // Check if player eats cell 
-                if(Entity.intersects(playerMouth, cell)) {
-                    it.remove();
-                    addEdible(player.eat(cell));            
-                    continue; // Food can only ne eaten once
-                }
+            if(eatIfMouthIntersects(player, cell)) {
+                it.remove();
+                continue;
             }
-
+            
             // Check if hostile creature eats cell 
-
             for(HostileCreature creature: hostileCreatures) {
-                if(Entity.intersects(creature.getMouth(), cell)) {
+                if(eatIfMouthIntersects(creature, cell)) {
                     it.remove();
-                    addEdible(creature.eat(cell));
-                    break; // Food can only ne eaten once 
+                    break;
                 }
             }
         }
