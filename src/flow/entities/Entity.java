@@ -83,7 +83,7 @@ public abstract class Entity implements IEntity {
      * Checks if 2 entities intersect
      * @return true if bounding box of e1 and e2 intersect
      */
-    public static boolean intersects(Entity e1, Entity e2) {
+    public static boolean intersects(IEntity e1, IEntity e2) {
         Rectangle r1 = e1.getBoundingBox();
         double x1 = r1.getX();
         double y1 = r1.getY();

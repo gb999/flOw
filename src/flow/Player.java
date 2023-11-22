@@ -12,9 +12,13 @@ import util.Vec2;
 
 public class Player extends ChainCreature implements MouseListener {
     boolean mouseDown = false;
-    Player(Vec2 pos) {
+    GameCanvas canvas;
+    Game game;
+    Player(Vec2 pos, Game game) {
         super(pos, 8, 3);
-        GameCanvas.canvas.addMouseListener(this);
+        canvas = game.getCanvas();
+        this.game = game;
+        canvas.addMouseListener(this);
         agressive = false;
     }
     @Override
@@ -23,9 +27,9 @@ public class Player extends ChainCreature implements MouseListener {
 
         // cursor location on screen = mousePos - canvasPos
         Point mousePos =  MouseInfo.getPointerInfo().getLocation();
-        Point canvasPos = GameCanvas.canvas.getLocationOnScreen();
+        Point canvasPos = canvas.getLocationOnScreen();
         // Velocity direction = cursor location - canvas center  
-        vel.set(mousePos.x - canvasPos.x - GameCanvas.canvas.getWidth() / 2, mousePos.y - canvasPos.y - GameCanvas.canvas.getHeight() / 2);
+        vel.set(mousePos.x - canvasPos.x - canvas.getWidth() / 2, mousePos.y - canvasPos.y - canvas.getHeight() / 2);
         
         vel.normalize();
         int mult = mouseDown ? 6 : 3;
@@ -63,6 +67,7 @@ public class Player extends ChainCreature implements MouseListener {
             b.desaturate();
         }
         eat(new PeacefulCell(pos, 1)); 
+        game.changeLevel(false);
         
     }
 }

@@ -9,35 +9,35 @@ import util.Vec2;
 
 
 public class GameCanvas extends JPanel {
-    static GameCanvas canvas;
-    GameCanvas() {
-        canvas = this;
-    }
+    Game game;
+    GameCanvas(Game game) {
+        this.game = game;
+    }   
     
     /**
      * Draws the whole game 
      */
     public void paint(Graphics g) {
         // Avoid Exception thrown by swing when drawing component 
-        if(Game.currentLevel == null) return;
+        if(game.currentLevel == null) return;
 
-        Player player = Game.player;
+        Player player = game.player;
         Vec2 cameraPos = new Vec2(player.pos.x - getWidth() / 2, player.pos.y - getHeight() / 2);
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         // Background
-        g2.setColor(Game.currentLevel.color);
+        g2.setColor(game.currentLevel.color);
         g2.fillRect(0, 0,  getWidth(), getHeight());
         
         
         g2.translate(-cameraPos.x, -cameraPos.y);
         g2.setColor(Color.WHITE);
 
-        Game.currentLevel.drawEntities(g2, true);
+        game.currentLevel.drawEntities(g2, true);
 
-        if(Game.nextLevel != null) {
+        if(game.nextLevel != null) {
             g2.setColor(new Color(255,255,255,70));
-            Game.nextLevel.drawEntities(g2, false);
+            game.nextLevel.drawEntities(g2, false);
         }
 
         g2.dispose();
