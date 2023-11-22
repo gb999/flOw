@@ -9,8 +9,8 @@ public class Ring {
      * Creates a ring shape centered around x, y coordinates
      * @param x Center x coordinate
      * @param y Center y coordinate
-     * @param r1 Inner radious
-     * @param r2 Outer radious
+     * @param r1 Inner radius
+     * @param r2 Outer radius
      * @return
      */
     public static Shape create(double x, double y, double r1, double r2) {

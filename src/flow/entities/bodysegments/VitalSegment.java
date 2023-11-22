@@ -8,9 +8,6 @@ import util.Vec2;
 
 
 public class VitalSegment extends BodySegment implements Edible {
-
-    
-    
     public VitalSegment(Vec2 pos) {
         super(pos);
         maxSaturation = 2;

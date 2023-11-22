@@ -162,7 +162,7 @@ public class Level {
         } 
         if(blueCell != null) {
             blueCell.update();
-            eatIfMouthIntersects(player, redCell);
+            eatIfMouthIntersects(player, blueCell);
         } 
     }
 
