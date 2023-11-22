@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import flow.Game;
+import flow.GameCanvas;
 import flow.entities.hostile.HostileCreature;
 import util.Vec2;
 
@@ -16,11 +17,16 @@ public abstract class ChangeLevelCell extends PeacefulCell{
     private long lastSignalStart;
     private boolean signal;
     protected Color cellColor;
+    protected Game game;
+    protected GameCanvas canvas;
 
-    public ChangeLevelCell(Vec2 pos, Color cellColor) {
+    public ChangeLevelCell(Vec2 pos, Color cellColor, Game game) {
         super(pos, 0);
         signal = false;
         this.cellColor = cellColor;
+        this.game = game;
+        canvas = game.getCanvas();
+
     }
 
     @Override
@@ -34,9 +40,9 @@ public abstract class ChangeLevelCell extends PeacefulCell{
         g2.setColor(currentColor);
         super.draw(g2);
         
-        double w = Game.canvas.getWidth();
-        double h = Game.canvas.getHeight();
-        Vec2 playerpos = Game.player.pos;
+        double w = canvas.getWidth();
+        double h = canvas.getHeight();
+        Vec2 playerpos = game.getPlayer().getPos();
         double px = playerpos.x;
         double py = playerpos.y;
         double cx = this.pos.x;

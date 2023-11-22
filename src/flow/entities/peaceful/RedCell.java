@@ -7,8 +7,8 @@ import util.Vec2;
 import java.awt.Color;
 
 public class RedCell extends ChangeLevelCell {
-    public RedCell(Vec2 pos) {
-        super(pos, new Color(255, 0 ,0));
+    public RedCell(Vec2 pos, Game game) {
+        super(pos, new Color(255, 0 ,0), game);
     }   
 
     /**
@@ -16,6 +16,7 @@ public class RedCell extends ChangeLevelCell {
      */
     @Override
     public void isEatenBy(HostileCreature creature) {
-        Game.changeLevel(true);
+        game.changeLevel(true);
+        
     }
 }

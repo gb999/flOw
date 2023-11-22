@@ -111,7 +111,6 @@ public class Level {
 
                 if(!player.isAlive()) {
                     player.die();
-                    Game.changeLevel(false);
                     break;
                 }
             }

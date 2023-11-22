@@ -18,6 +18,5 @@ public class SimpleSegment extends BodySegment {
         if(saturation == 1) {
             g2.fillOval((int)(pos.x - r), (int)(pos.y-r), (int)(2 * r), (int)(2 * r));
         }
-
     }
 }

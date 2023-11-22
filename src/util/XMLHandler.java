@@ -92,15 +92,15 @@ public class XMLHandler extends DefaultHandler {
             // Add cells for changing levels
             for(int i = 0 ; i < levelLoaders.size() - 1; i++) {
                 levelLoaders.get(i).addCommand(level-> {
-                    level.setRedCell(new RedCell(Vec2.getRandomVec2InRadius(1500)));
+                    level.setRedCell(new RedCell(Vec2.getRandomVec2InRadius(1500), game));
                 });
             }
             for(int i = 1 ; i < levelLoaders.size(); i++) {
                 levelLoaders.get(i).addCommand(level-> {
-                    level.setBlueCell(new BlueCell(Vec2.getRandomVec2InRadius(1500)));
+                    level.setBlueCell(new BlueCell(Vec2.getRandomVec2InRadius(1500), game));
                 });
             }
-            Game.setLevelLoaders(levelLoaders);
+            game.setLevelLoaders(levelLoaders);
         }
     }
 }

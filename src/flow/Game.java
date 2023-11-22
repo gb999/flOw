@@ -8,14 +8,20 @@ import util.LevelLoader;
 import util.Vec2;
 
 public class Game implements Runnable {
-    public static GameCanvas canvas;
+    protected GameCanvas canvas;
+    public GameCanvas getCanvas() {
+        return canvas;
+    }
     private JFrame window;
-    private static int currentLevelIndex;
-    public static Level currentLevel;
-    protected static Level nextLevel;
-    private static List<LevelLoader> levelLoaders;
+    protected int currentLevelIndex;
+    protected Level currentLevel;
+    protected  Level nextLevel;
+    private List<LevelLoader> levelLoaders;
     
-    public static Player player;
+    protected Player player;
+    public Player getPlayer() {
+        return player;
+    }
 
     private double FPS = 30;
     private Thread gameThread;
@@ -26,7 +32,7 @@ public class Game implements Runnable {
      * Change level to previous level if next is false.
      * @param next
      */
-    public static void changeLevel(boolean next) {
+    public void changeLevel(boolean next) {
         if(next) {
             currentLevelIndex += 1; 
             currentLevel = nextLevel;
@@ -50,7 +56,7 @@ public class Game implements Runnable {
         window.setLocationRelativeTo(null);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        canvas = new GameCanvas();
+        canvas = new GameCanvas(this);
         window.add(canvas);
         window.setVisible(true);
     }
@@ -60,7 +66,7 @@ public class Game implements Runnable {
         initUI();
         currentLevelIndex = 0;
         levelLoaders = new ArrayList<>();
-        player = new Player(new Vec2(0,0));
+        player = new Player(new Vec2(0,0), this);
         gameThread = new Thread(this);
     }
     
@@ -115,7 +121,7 @@ public class Game implements Runnable {
      * Sets levelLoaders. LevelLoaders are used to reload levels, when player enters another level.
      * @param levelLoaders list of the loaders
      */
-    public static void setLevelLoaders(ArrayList<LevelLoader> levelLoaders) {
-        Game.levelLoaders = levelLoaders; 
+    public void setLevelLoaders(ArrayList<LevelLoader> levelLoaders) {
+        this.levelLoaders = levelLoaders; 
     }
 }

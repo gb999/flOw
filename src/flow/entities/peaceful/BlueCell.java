@@ -8,8 +8,8 @@ import util.Vec2;
 
 public class BlueCell extends ChangeLevelCell{
 
-    public BlueCell(Vec2 pos) {
-        super(pos, new Color(0,0, 255));
+    public BlueCell(Vec2 pos, Game game) {
+        super(pos, new Color(0,0, 255), game);
     }
     
     /**
@@ -17,6 +17,6 @@ public class BlueCell extends ChangeLevelCell{
      */
     @Override
     public void isEatenBy(HostileCreature creature) {
-        Game.changeLevel(false);
+        game.changeLevel(false);
     }
 }
